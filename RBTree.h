@@ -23,11 +23,11 @@ struct RBIter{
 
 typedef
 struct RBTree{
-    ERbstatus  (*insert) (RBTree_t* ,void *toInsert);
+    ERbstatus (*insert) (RBTree_t* ,void *toInsert);
     ERbstatus (*delete) (RBTree_ *,void *toDelete);
-    RBIter * (*find) (RBTree_t *,void *toFind);
-    RBIter * (*lowerBound)(RBTree_t*,void *k);
-    RBIter * (*upperBound)(RBTree_t*,void *k);
+    RBIter* (*find) (RBTree_t *,void *toFind);
+    RBIter* (*lowerBound)(RBTree_t*,void *k);
+    RBIter* (*upperBound)(RBTree_t*,void *k);
 }RBTree_t;
 
 typedef void* (*Allcoator)(size_t sizeToAllocate);
