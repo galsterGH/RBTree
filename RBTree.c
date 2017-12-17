@@ -44,6 +44,54 @@ struct RBNode{
 
 static Node *root = NULL;
 
+static
+void
+adjustInsert(
+  Node *ins){
+
+  Node *p = NULL,*gp = NULL,*uncle = NULL;
+  int uncleDir = 0;
+
+  while(ins != root){
+    p = ins->parent;
+    gp = p->parent;
+    uncle = (gp->left == p ? gp->right : gp->left);
+
+    if(GET_COLOR(p) == BLACK){
+      break;
+    }
+
+    if(GET_COLOR(p) == RED && GET_COLOR(uncle) == RED){
+      COLOR_BLACK(p);
+      COLOR_BLACK(uncle);
+      ins = gp;
+    }
+    else{
+      if(ins == p->left && uncle == gp->left){
+        rightRotate(p);
+        p = ins;
+      }
+      else if(ins == p->right && uncle == gp->right){
+        leftRotate(p);
+        p = ins;
+      }
+
+      SWAP_COLORS(p);
+      SWAP_COLORS(gp);
+
+      if(p == gp->left){
+        rightRotate(gp);
+      }
+      else{
+        leftRotate(gp);
+      }
+
+      break;
+    }
+  }
+
+  COLOR_BLACK(root);
+}
 
 static
 Node*
