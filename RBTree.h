@@ -10,14 +10,15 @@ enum RBStatus{
    enOutOfMem,
    enUninitializedLib,
    enKeyNotFound,
+   enDupKeys
 }ERbstatus;
 
 typedef
 struct RBIter{
-    bool (*hasNext)(RBIter_t *);
-    bool (*hasPrev)(RBIter_t *);
-    void* (*getNext)(RBIter_t *);
-    void* (*getPrev)(RBIter_t *);
+    bool (*hasNext)(RBIter_t*);
+    bool (*hasPrev)(RBIter_t*);
+    void* (*getNext)(RBIter_t*);
+    void* (*getPrev)(RBIter_t*);
 }RBIter_t ;
 
 typedef
@@ -37,7 +38,7 @@ RBTree_t *
 createRBTree(
     Allocator alloc,
     Deallocator dealloc,
-    compRes comparator);x
+    compRes comparator);
 
 void
 deleteRBTree(
