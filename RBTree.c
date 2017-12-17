@@ -20,13 +20,8 @@
 #define GET_COLOR(n) (n->color).rb;
 #define SWAP_COLORS(n) (n->color).rb++
 
-typedef
-struct RBTreeImpl{
-   RBTree_t api;
-   Allocator alloc;
-   Deallocator dealloc;
-   compRes comparator;
-}Tree;
+//forward declare RBTreeImpl
+struct RBTreeImpl;
 
 typedef
 struct RBNode{
@@ -34,7 +29,7 @@ struct RBNode{
   Node *left;
   Node *right;
   Node *parent;
-  RBTreeImpl *tree;
+  struct RBTreeImpl *tree;
 
   struct Color{
     unsigned rb : 1;
@@ -42,36 +37,57 @@ struct RBNode{
 
 }Node;
 
-static Node *root = NULL;
+typedef
+struct RBTreeImpl{
+   RBTree_t api;
+   Node *root;
+   Allocator alloc;
+   Deallocator dealloc;
+   compRes comparator;
+}Tree;
+
 
 static
 void
 adjustInsert(
   Node *ins){
 
+  assert(ins != NULL);
   Node *p = NULL,*gp = NULL,*uncle = NULL;
+  Node *root = ins->tree->root;
   int uncleDir = 0;
 
   while(ins != root){
     p = ins->parent;
     gp = p->parent;
     uncle = (gp->left == p ? gp->right : gp->left);
+    uncldeDir = (gp->left == p);
 
     if(GET_COLOR(p) == BLACK){
       break;
     }
 
-    if(GET_COLOR(p) == RED && GET_COLOR(uncle) == RED){
+    //
+    // a NULL uncle is a black uncle
+    //
+    if(uncle &&
+       GET_COLOR(p) == RED &&
+       GET_COLOR(uncle) == RED){
+
       COLOR_BLACK(p);
       COLOR_BLACK(uncle);
+
+      //
+      //the gradfather could be violating RB props
+      //
       ins = gp;
     }
     else{
-      if(ins == p->left && uncle == gp->left){
+      if(ins == p->left && !uncleDir){
         rightRotate(p);
         p = ins;
       }
-      else if(ins == p->right && uncle == gp->right){
+      else if(ins == p->right && uncleDir){
         leftRotate(p);
         p = ins;
       }
@@ -96,6 +112,7 @@ adjustInsert(
 static
 Node*
 getInsPoint(
+    Node *root,
     void *key){
 
   assert(root != NULL);
@@ -136,25 +153,27 @@ insert(
     Tree *treeImpl = TO_TREE(toInsert);
     Node *toIns = NULL;
     Node *insPoint = NULL;
+    Node **root = NULL;
     CompRes comp = NULL;
     int res = 0;
 
     if(treeImpl == NULL){
-          return enUninitializedLib;
+      return enUninitializedLib;
     }
 
+    root = &(treeImpl->root);
     comp = treeImpl->comparator;
     ALLOC(Node,toIns,treeImpl->alloc,sizeof(Node),enOutOfMem);
     toIns->key = toInsert;
     toIns->tree = tree;
     COLOR_RED(toIns);
 
-    if(!root){
-      root = toIns;
-      COLOR_BLACK(root);
+    if(!(*root)){
+      *root = toIns;
+      COLOR_BLACK(*root);
     }
     else{
-      insPoint = getInsPoint(toInsert);
+      insPoint = getInsPoint(*root,toInsert);
       assert(insPoint != NULL);
       res = comp(insPoint->key,toInsert);
 
@@ -197,5 +216,16 @@ createRBTree(
 
 void
 deleteRBTree(RBTree_t *tree){
+
+  Node *curr =
+
+  if(!tree){
+     return enUninitializedLib;
+  }
+
+  while(curr){
+
+  }
+
    TO_TREE(tree)->dealloc(tree);
 }
