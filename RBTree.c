@@ -57,7 +57,9 @@ adjustInsert(
   Node *root = ins->tree->root;
   int uncleDir = 0;
 
-  while(ins != root){
+  while(ins != root &&
+        GET_COLOR(ins->parent) == RED){
+
     p = ins->parent;
     gp = p->parent;
     uncle = (gp->left == p ? gp->right : gp->left);
@@ -198,6 +200,20 @@ insert(
     return (enSucc);
 }
 
+static
+void
+deleteNodes(Nodes **root){
+  //TODO - do it iteratively
+  if(!(*root)){
+    return;
+  }
+
+  deleteNodes(&(root->left));
+  deleteNodes(&(root->right));
+  root->tree->dealloc(*root);
+  root = NULL;
+}
+
 
 RBTree_t *
 createRBTree(
@@ -217,15 +233,10 @@ createRBTree(
 void
 deleteRBTree(RBTree_t *tree){
 
-  Node *curr =
-
   if(!tree){
      return enUninitializedLib;
   }
 
-  while(curr){
-
-  }
-
-   TO_TREE(tree)->dealloc(tree);
+  deleteNodes(&(tree->root));
+  TO_TREE(tree)->dealloc(tree);
 }
