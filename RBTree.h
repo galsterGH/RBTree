@@ -17,17 +17,19 @@ typedef
 struct RBIter{
     bool (*hasNext)(RBIter_t*);
     bool (*hasPrev)(RBIter_t*);
-    void* (*getNext)(RBIter_t*);
-    void* (*getPrev)(RBIter_t*);
+    RBIter_t* (*getNext)(RBIter_t*);
+    RBIter_t* (*getPrev)(RBIter_t*);
 }RBIter_t ;
 
 typedef
 struct RBTree{
     ERbstatus (*insert) (RBTree_t* ,void *toInsert);
-    ERbstatus (*delete) (RBTree_ *,void *toDelete);
-    RBIter* (*find) (RBTree_t *,void *toFind);
-    RBIter* (*lowerBound)(RBTree_t*,void *k);
-    RBIter* (*upperBound)(RBTree_t*,void *k);
+    ERbstatus (*delete) (RBTree_t*, void *toDelete);
+    RBIter_t* (*begin)(RBTree_t*);
+    RBITer_t* (*end)(RBTree_t*);
+    RBIter_t* (*find) (RBTree_t *,void *toFind);
+    RBIter_t* (*lowerBound)(RBTree_t*,void *k);
+    RBIter_t* (*upperBound)(RBTree_t*,void *k);
 }RBTree_t;
 
 typedef void* (*Allcoator)(size_t sizeToAllocate);

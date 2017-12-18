@@ -12,6 +12,8 @@
       memset(x,0,size);\
   }while(0)
 
+#define FALSE (0)
+#define TRUE (1)
 #define RED (0)
 #define BLACK (1)
 #define TO_TREE(t) ((Tree*)(t))
@@ -46,6 +48,109 @@ struct RBTreeImpl{
    compRes comparator;
 }Tree;
 
+
+typedef
+struct RBIterImpl{
+  RBIter_t iterBase;
+  Node *currNode;
+}Iterator;
+
+static
+int
+handleExpection(Node *curr){
+  if(curr){
+    curr->tree->dealloc(curr);
+  }
+
+  return (1);
+}
+
+static
+Node*
+getInorderSucc(Node *curr){
+  Node *succ = NULL;
+
+  if(!curr || !(curr->right)){
+    return NULL;
+  }
+
+  for(succ = curr->right;
+      succ->left;
+      succ = succ->left);
+
+  return succ;
+}
+
+static
+bool
+hasNext(RBIter_t *it){
+
+  Iterator iter = ((Iterator*)it);
+  Node *curr = NULL;
+
+  if(!iter){
+    return false;
+  }
+
+  curr = iter->currNode;
+  assert(curr);
+
+  if(curr->right || curr->parent){
+    return TRUE;
+  }
+
+  return FALSE;
+}
+
+static
+bool
+hasPrev(RBIter_t *it){
+
+  Iterator iter = ((Iterator*)it);
+  Node *curr = NULL;
+
+  if(!iter){
+    return false;
+  }
+
+  curr = iter->currNode;
+  assert(curr);
+
+  if(curr->left || curr->parent){
+    return TRUE;
+  }
+
+  return FALSE;
+}
+
+static
+RBIter_t*
+getNext(RBIter_t *it){
+  Iterator *iter = ((Iterator*)it);
+  Node *curr = NULL, *toRet = NULL;
+  Iterator *result = NULL;
+  assert(it);
+  curr = iter->currNode;
+  assert(curr);
+
+  if(curr->right){
+    toRet = getInorderSucc(curr);
+  }
+  else{
+    toRet = curr->p;
+  }
+
+  ALLOC(Iterator,
+        result,
+        curr->tree->alloc,
+        sizeof(Iterator),
+        handleExpection(iter));
+
+  result->currNode = toRet;
+  memcpy(&(result->iterBase),*it,sizeof(RBIter_t));
+  curr->tree->dealloc(it);
+  return &(result->iterBase);
+}
 
 static
 void
@@ -201,6 +306,58 @@ insert(
 }
 
 static
+Node*
+findNode(
+    Node *root,
+    void *toFind){
+
+  int res = 0;
+  while(root){
+    res = root->tree->comparator(root->key,toFind);
+
+    if(!res){
+      break;
+    }
+
+    if(res < 0)
+      root = root->right;
+    else
+      root = root->left;
+  }
+
+  return root;
+}
+
+static
+RBIter_t*
+find(
+     RBTree_t *tree,
+     void *toFind){
+
+  Node *retNode = NULL;
+  Iterator *iter = NULL;
+
+  if(!treeImpl){
+    return enUninitializedLib;
+  }
+
+  retNode = findNode(tree->root,toFind);
+
+  if(!retNode){
+    return end();
+  }
+
+  ALOCC(Iterator,
+        iter,
+        tree->alloc,
+        sizeof(Iterator),
+        end());
+
+  initIterator(iter,retNode);
+  return (&(iter-iterBase));
+}
+
+static
 void
 deleteNodes(Nodes **root){
   //TODO - do it iteratively
@@ -227,6 +384,9 @@ createRBTree(
   tree->alloc = alloc;
   tree->dealloc = dealloc;
   tree->comparator = comparator;
+  tree->api.insert = &insert;
+  tree->api.delete = &delete;
+  tree->api.find = &find;
   return &(api);
 }
 
