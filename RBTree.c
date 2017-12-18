@@ -258,7 +258,7 @@ insert(
     RBTree_t *tree,
     void *toInsert){
 
-    Tree *treeImpl = TO_TREE(toInsert);
+    Tree *treeImpl = TO_TREE(tree);
     Node *toIns = NULL;
     Node *insPoint = NULL;
     Node **root = NULL;
