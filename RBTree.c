@@ -183,6 +183,7 @@ adjustInsert(
 
       COLOR_BLACK(p);
       COLOR_BLACK(uncle);
+      COLOR_RED(gp);
 
       //
       //the gradfather could be violating RB props
