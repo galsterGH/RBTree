@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
+#include <string.h>
 #include "RBTree.h"
+
 
 #define ALLOC(T,x,alloc,size,res)                  \
   do{\
@@ -17,10 +19,10 @@
 #define RED (0)
 #define BLACK (1)
 #define TO_TREE(t) ((Tree*)(t))
-#define COLOR_RED(n) (n->color).rb = RED
-#define COLOR_BLACK(n) (n->color).rb = BLACK
-#define GET_COLOR(n) (n->color).rb;
-#define SWAP_COLORS(n) (n->color).rb++
+#define COLOR_RED(n) ((n)->color).rb = RED
+#define COLOR_BLACK(n) ((n)->color).rb = BLACK
+#define GET_COLOR(n) ((n)->color).rb
+#define SWAP_COLORS(n) ((n)->color).rb++
 
 //forward declare RBTreeImpl
 struct RBTreeImpl;
@@ -28,9 +30,9 @@ struct RBTreeImpl;
 typedef
 struct RBNode{
   void *key;
-  Node *left;
-  Node *right;
-  Node *parent;
+  struct RBNode *left;
+  struct RBNode *right;
+  struct RBNode *parent;
   struct RBTreeImpl *tree;
 
   struct Color{
@@ -45,7 +47,7 @@ struct RBTreeImpl{
    Node *root;
    Allocator alloc;
    Deallocator dealloc;
-   compRes comparator;
+   Comparator comparator;
 #ifdef _DEBUG_RBTREE_
   shower show;
 #endif
@@ -170,7 +172,7 @@ leftRotate(Node *n){
   }
 
   right = n->right;
-  *leftRight = (right ? right->left : NULL);
+  leftRight = (right ? right->left : NULL);
   n->right = leftRight;
   leftRight->parent = n;
   right->left = n;
@@ -195,7 +197,7 @@ rightRotate(Node *n){
   }
 
   left = n->left;
-  *rightLeft = (left ? left->right : NULL);
+  rightLeft = (left ? left->right : NULL);
   n->left = rightLeft;
   rightLeft->parent = n;
   left->right = n;
@@ -203,10 +205,10 @@ rightRotate(Node *n){
   n->parent = left;
 
   if(n == left->parent->left){
-    left->parent->left = right;
+    left->parent->left = left;
   }
   else{
-    left->parent->right = right;
+    left->parent->right = left;
   }
 }
 
@@ -226,7 +228,7 @@ adjustInsert(
     p = ins->parent;
     gp = p->parent;
     uncle = (gp->left == p ? gp->right : gp->left);
-    uncldeDir = (gp->left == p);
+    uncleDir = (gp->left == p);
 
     if(GET_COLOR(p) == BLACK){
       break;
@@ -283,7 +285,7 @@ getInsPoint(
 
   assert(root != NULL);
   Node *curr = root;
-  CompRes comp = curr->tree->comparator;
+  Comparator comp = curr->tree->comparator;
   int res = 0;
 
   while(curr){
@@ -320,7 +322,7 @@ insert(
     Node *toIns = NULL;
     Node *insPoint = NULL;
     Node **root = NULL;
-    CompRes comp = NULL;
+    Comparator comp = NULL;
     int res = 0;
 
     if(treeImpl == NULL){
@@ -331,7 +333,7 @@ insert(
     comp = treeImpl->comparator;
     ALLOC(Node,toIns,treeImpl->alloc,sizeof(Node),FALSE);
     toIns->key = toInsert;
-    toIns->tree = tree;
+    toIns->tree = treeImpl;
     COLOR_RED(toIns);
 
     if(!(*root)){
@@ -344,7 +346,7 @@ insert(
       res = comp(insPoint->key,toInsert);
 
       if(res == 0){
-        tree->dealloc(toIns);
+        treeImpl->dealloc(toIns);
         return FALSE;
       }
 
@@ -466,15 +468,15 @@ find(
 
 static
 void
-deleteNodes(Nodes **root){
+deleteNodes(Node **root){
   //TODO - do it iteratively
   if(!(*root)){
     return;
   }
 
-  deleteNodes(&(root->left));
-  deleteNodes(&(root->right));
-  root->tree->dealloc(*root);
+  deleteNodes(&((*root)->left));
+  deleteNodes(&((*root)->right));
+  (*root)->tree->dealloc(*root);
   root = NULL;
 }
 
@@ -483,7 +485,7 @@ RBTree_t *
 createRBTree(
     Allocator alloc,
     Deallocator dealloc,
-    compRes comparator
+    Comparator comparator
 #ifdef _DEBUG_RBTREE_
     ,shower show
 #endif
@@ -496,7 +498,7 @@ createRBTree(
   tree->dealloc = dealloc;
   tree->comparator = comparator;
   tree->api.insert = &insert;
-  tree->api.delete = &delete;
+  tree->api.delete = NULL;
   tree->api.find = &find;
 
 #ifdef _DEBUG_RBTREE_
@@ -507,13 +509,14 @@ createRBTree(
   return &(tree->api);
 }
 
-void
+bool
 deleteRBTree(RBTree_t *tree){
 
   if(!tree){
-     return enUninitializedLib;
+    return TRUE;
   }
 
   deleteNodes(&(TO_TREE(tree)->root));
   TO_TREE(tree)->dealloc(tree);
+  return TRUE;
 }
