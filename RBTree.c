@@ -81,6 +81,7 @@ getInorderSucc(Node *curr){
   return succ;
 }
 
+/*
 static
 bool
 hasNext(RBIter_t *it){
@@ -101,6 +102,7 @@ hasNext(RBIter_t *it){
 
   return FALSE;
 }
+
 
 static
 bool
@@ -151,6 +153,8 @@ getNext(RBIter_t *it){
   curr->tree->dealloc(it);
   return &(result->iterBase);
 }
+
+*/
 
 static
 void
@@ -330,6 +334,21 @@ findNode(
 }
 
 static
+void *
+find(Node *root,
+     void *toFind){
+
+  Node *n = findNode(root,toFind);
+
+  if(!n){
+    return NULL;
+  }
+
+  return n->key;
+}
+
+/*
+static
 RBIter_t*
 find(
      RBTree_t *tree,
@@ -357,6 +376,7 @@ find(
   initIterator(iter,retNode);
   return (&(iter-iterBase));
 }
+*/
 
 static
 void
@@ -398,6 +418,6 @@ deleteRBTree(RBTree_t *tree){
      return enUninitializedLib;
   }
 
-  deleteNodes(&(tree->root));
+  deleteNodes(&(TO_TREE(tree)->root));
   TO_TREE(tree)->dealloc(tree);
 }

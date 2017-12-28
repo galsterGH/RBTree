@@ -25,11 +25,13 @@ typedef
 struct RBTree{
     ERbstatus (*insert) (RBTree_t* ,void *toInsert);
     ERbstatus (*delete) (RBTree_t*, void *toDelete);
+    void*  (*find)(RBTree_tr *, void *key);
+    /*
     RBIter_t* (*begin)(RBTree_t*);
     RBITer_t* (*end)(RBTree_t*);
     RBIter_t* (*find) (RBTree_t *,void *toFind);
     RBIter_t* (*lowerBound)(RBTree_t*,void *k);
-    RBIter_t* (*upperBound)(RBTree_t*,void *k);
+    RBIter_t* (*upperBound)(RBTree_t*,void *k);*/
 }RBTree_t;
 
 typedef void* (*Allcoator)(size_t sizeToAllocate);
