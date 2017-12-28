@@ -46,6 +46,9 @@ struct RBTreeImpl{
    Allocator alloc;
    Deallocator dealloc;
    compRes comparator;
+#ifdef _DEBUG_RBTREE_
+  shower show;
+#endif
 }Tree;
 
 
@@ -54,6 +57,7 @@ struct RBIterImpl{
   RBIter_t iterBase;
   Node *currNode;
 }Iterator;
+
 
 static
 int
@@ -158,6 +162,56 @@ getNext(RBIter_t *it){
 
 static
 void
+leftRotate(Node *n){
+  Node *right = NULL,*leftRight = NULL;
+
+  if(!n){
+    return;
+  }
+
+  right = n->right;
+  *leftRight = (right ? right->left : NULL);
+  n->right = leftRight;
+  leftRight->parent = n;
+  right->left = n;
+  right->parent = n->parent;
+  n->parent = right;
+
+  if(n == right->parent->left){
+    right->parent->left = right;
+  }
+  else{
+    right->parent->right = right;
+  }
+}
+
+static
+void
+rightRotate(Node *n){
+  Node *left = NULL,*rightLeft = NULL;
+
+  if(!n){
+    return;
+  }
+
+  left = n->left;
+  *rightLeft = (left ? left->right : NULL);
+  n->left = rightLeft;
+  rightLeft->parent = n;
+  left->right = n;
+  left->parent = n->parent;
+  n->parent = left;
+
+  if(n == left->parent->left){
+    left->parent->left = right;
+  }
+  else{
+    left->parent->right = right;
+  }
+}
+
+static
+void
 adjustInsert(
   Node *ins){
 
@@ -257,7 +311,7 @@ getInsPoint(
 }
 
 static
-ERbstatus
+bool
 insert(
     RBTree_t *tree,
     void *toInsert){
@@ -270,12 +324,12 @@ insert(
     int res = 0;
 
     if(treeImpl == NULL){
-      return enUninitializedLib;
+      return FALSE;
     }
 
     root = &(treeImpl->root);
     comp = treeImpl->comparator;
-    ALLOC(Node,toIns,treeImpl->alloc,sizeof(Node),enOutOfMem);
+    ALLOC(Node,toIns,treeImpl->alloc,sizeof(Node),FALSE);
     toIns->key = toInsert;
     toIns->tree = tree;
     COLOR_RED(toIns);
@@ -291,7 +345,7 @@ insert(
 
       if(res == 0){
         tree->dealloc(toIns);
-        return enDupKeys;
+        return FALSE;
       }
 
       if(res < 0){
@@ -307,7 +361,7 @@ insert(
       }
     }
 
-    return (enSucc);
+    return (TRUE);
 }
 
 static
@@ -333,12 +387,44 @@ findNode(
   return root;
 }
 
+
+#ifdef _DEBUG_RBTREE_
+static
+void
+showRecursively(RBTree_t *t, Node *n){
+  if(!n){
+    return;
+  }
+
+  showRecursively(t,n->left);
+  t->show(n->key);
+  showRecursively(t,n->right);
+}
+
+static
+void
+showTree(RBTree_t *t){
+  if(!t || !(t->show)){
+    return FALSE;
+  }
+
+  Node *n = TO_TREE(t)->root;
+  showRecursively(t,n);
+  return TRUE;
+}
+
+#endif
+
 static
 void *
-find(Node *root,
+find(RBTree_t * t,
      void *toFind){
 
-  Node *n = findNode(root,toFind);
+  if(!t){
+    return NULL;
+  }
+
+  Node *n = findNode(TO_TREE(t)->root,toFind);
 
   if(!n){
     return NULL;
@@ -397,7 +483,11 @@ RBTree_t *
 createRBTree(
     Allocator alloc,
     Deallocator dealloc,
-    compRes comparator){
+    compRes comparator
+#ifdef _DEBUG_RBTREE_
+    ,shower show
+#endif
+             ){
 
   Tree *tree = NULL;
   ALLOC(Tree,tree,alloc,sizeof(Tree),NULL);
@@ -408,7 +498,13 @@ createRBTree(
   tree->api.insert = &insert;
   tree->api.delete = &delete;
   tree->api.find = &find;
-  return &(api);
+
+#ifdef _DEBUG_RBTREE_
+  tree->show = show;
+  tree->api.showTree = showTree;
+#endif
+
+  return &(tree->api);
 }
 
 void

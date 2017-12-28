@@ -23,9 +23,12 @@ struct RBIter{
 
 typedef
 struct RBTree{
-    ERbstatus (*insert) (RBTree_t* ,void *toInsert);
-    ERbstatus (*delete) (RBTree_t*, void *toDelete);
-    void*  (*find)(RBTree_tr *, void *key);
+    bool  (*insert) (RBTree_t* ,void *toInsert);
+    bool (*delete) (RBTree_t*, void *toDelete);
+    void*  (*find)(RBTree_t *, void *key);
+#ifdef _DEBUG_RBTREE_
+    void (*showTree)(RBTree_t*)
+#endif
     /*
     RBIter_t* (*begin)(RBTree_t*);
     RBITer_t* (*end)(RBTree_t*);
@@ -38,11 +41,20 @@ typedef void* (*Allcoator)(size_t sizeToAllocate);
 typedef void (*Deallocator)(void*);
 typedef compRes (*Comparator)(void*, void*);
 
+#ifdef _DEBUG_RBTREE_
+typedef void (*shower)(void*);
+#endif
+
+
 RBTree_t *
 createRBTree(
     Allocator alloc,
     Deallocator dealloc,
-    compRes comparator);
+    compRes comparator
+#ifdef _DEBUG_RBTREE_
+    ,shower show
+#endif
+    );
 
 void
 deleteRBTree(
