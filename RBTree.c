@@ -164,52 +164,44 @@ getNext(RBIter_t *it){
 
 static
 void
-leftRotate(Node *n){
-  Node *right = NULL,*leftRight = NULL;
+leftRotate(Node **rot){
+  Node *n = NULL,*right = NULL,*leftRight = NULL;
 
-  if(!n){
+  if(!rot && !(*rot)){
     return;
   }
 
+  n = *rot;
   right = n->right;
+
+  // when we left rotate we have to have a right child
+  assert(right != NULL);
+
   leftRight = (right ? right->left : NULL);
   n->right = leftRight;
-  leftRight->parent = n;
+
+  if(leftRight) {
+    leftRight->parent = n;
+  }
+
   right->left = n;
   right->parent = n->parent;
-  n->parent = right;
 
-  if(n == right->parent->left){
-    right->parent->left = right;
+  if(n->parent) {
+    if (n == n->parent->left) {
+       n->parent->left = right;
+    } else {
+      n->parent->right = right;
+    }
+
+    n->parent = right;
   }
   else{
-    right->parent->right = right;
-  }
-}
-
-static
-void
-rightRotate(Node *n){
-  Node *left = NULL,*rightLeft = NULL;
-
-  if(!n){
-    return;
+    assert(n == n->tree->root);
+    n->tree->root = right;
   }
 
-  left = n->left;
-  rightLeft = (left ? left->right : NULL);
-  n->left = rightLeft;
-  rightLeft->parent = n;
-  left->right = n;
-  left->parent = n->parent;
-  n->parent = left;
-
-  if(n == left->parent->left){
-    left->parent->left = left;
-  }
-  else{
-    left->parent->right = left;
-  }
+  *rot = right;
 }
 
 static
@@ -351,10 +343,10 @@ insert(
       }
 
       if(res < 0){
-        insPoint->left = toIns;
+        insPoint->right = toIns;
       }
       else{
-        insPoint->right = toIns;
+        insPoint->left = toIns;
       }
 
       toIns->parent = insPoint;

@@ -40,8 +40,11 @@ int main(){
   int l = 2;
   int k = 10;
   t->insert(t,&i);
+  t->showTree(t);
   t->insert(t,&j);
+  t->showTree(t);
   t->insert(t,&l);
+  t->showTree(t);
   t->insert(t,&k);
   t->showTree(t);
 
