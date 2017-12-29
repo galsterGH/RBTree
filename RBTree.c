@@ -399,14 +399,14 @@ showRecursively(RBTree_t *t, Node *n){
   }
 
   showRecursively(t,n->left);
-  t->show(n->key);
+  TO_TREE(t)->show(n->key);
   showRecursively(t,n->right);
 }
 
 static
-void
+bool
 showTree(RBTree_t *t){
-  if(!t || !(t->show)){
+  if(!t || TO_TREE(t)->show == NULL){
     return FALSE;
   }
 

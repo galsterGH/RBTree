@@ -1,8 +1,8 @@
-#include "RBTree.h"
 #include <stdio.h>
 #include <stdlib.h>
 
 #define _DEBUG_RBTREE_
+#include "RBTree.h"
 
 void *alloc(size_t b){
   return malloc(b);
@@ -43,8 +43,7 @@ int main(){
   t->insert(t,&j);
   t->insert(t,&l);
   t->insert(t,&k);
-
-  t->showTree();
+  t->showTree(t);
 
   return 0;
 }

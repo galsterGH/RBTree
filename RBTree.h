@@ -3,6 +3,9 @@
 
 #include <stddef.h>
 
+
+#define _DEBUG_RBTREE_
+
 typedef int bool;
 typedef int compRes;
 
