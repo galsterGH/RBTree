@@ -5,7 +5,7 @@
 #include "RBTree.h"
 
 
-#define ALLOC(T,x,alloc,size,res)                  \
+#define ALLOC(T,x,alloc,size,res) \
   do{\
      x = (T*)alloc(size);\
       if(!x){\
@@ -23,6 +23,12 @@
 #define COLOR_BLACK(n) ((n)->color).rb = BLACK
 #define GET_COLOR(n) ((n)->color).rb
 #define SWAP_COLORS(n) ((n)->color).rb++
+#define RIGHT_ROTATE(n) ((n).dir)
+
+typedef struct{
+    unsigned dir : 1;
+}Dir;
+
 
 //forward declare RBTreeImpl
 struct RBTreeImpl;
@@ -164,45 +170,96 @@ getNext(RBIter_t *it){
 
 static
 void
-leftRotate(Node **rot){
-  Node *n = NULL,*right = NULL,*leftRight = NULL;
+rotate(Node **rot, const Dir dir){
+    Node *n = NULL,*newParent = NULL,*newParentSon = NULL;
 
-  if(!rot && !(*rot)){
-    return;
+    if(!rot && !(*rot)){
+      return;
+    }
+
+    n = *rot;
+    newParent = (RIGHT_ROTATE(dir) ? n->left : n->right);
+
+    // when we  rotate we have to have a child to replace this node
+    assert(newParent != NULL);
+    newParentSon = (RIGHT_ROTATE(dir) ? newParent->right : newParent->left);
+
+  if(RIGHT_ROTATE(dir)){
+    n->left = newParentSon;
+    newParent->right = n;
+  }
+  else {
+    n->right = newParentSon;
+    newParent->left = n;
   }
 
-  n = *rot;
-  right = n->right;
+  newParent->parent = n->parent;
 
-  // when we left rotate we have to have a right child
-  assert(right != NULL);
-
-  leftRight = (right ? right->left : NULL);
-  n->right = leftRight;
-
-  if(leftRight) {
-    leftRight->parent = n;
+  if(newParentSon) {
+    newParentSon->parent = n;
   }
-
-  right->left = n;
-  right->parent = n->parent;
 
   if(n->parent) {
     if (n == n->parent->left) {
-       n->parent->left = right;
+      n->parent->left = newParent;
     } else {
-      n->parent->right = right;
+      n->parent->right = newParent;
     }
-
-    n->parent = right;
   }
   else{
     assert(n == n->tree->root);
-    n->tree->root = right;
+    n->tree->root = newParent;
   }
 
-  *rot = right;
+  n->parent = newParent;
+  *rot = newParent;
 }
+
+/*static
+void
+leftRotate(Node **rot){
+  static
+  void
+  leftRotate(Node **rot){
+    Node *n = NULL,*right = NULL,*leftRight = NULL;
+
+    if(!rot && !(*rot)){
+      return;
+    }
+
+    n = *rot;
+    right = n->right;
+
+    // when we left rotate we have to have a right child
+    assert(right != NULL);
+
+    leftRight = (right ? right->left : NULL);
+    n->right = leftRight;
+
+    if(leftRight) {
+      leftRight->parent = n;
+    }
+
+    right->left = n;
+    right->parent = n->parent;
+
+    if(n->parent) {
+      if (n == n->parent->left) {
+        n->parent->left = right;
+      } else {
+        n->parent->right = right;
+      }
+
+      n->parent = right;
+    }
+    else{
+      assert(n == n->tree->root);
+      n->tree->root = right;
+    }
+
+    *rot = right;
+  }
+}*/
 
 static
 void
@@ -213,6 +270,7 @@ adjustInsert(
   Node *p = NULL,*gp = NULL,*uncle = NULL;
   Node *root = ins->tree->root;
   int uncleDir = 0;
+  static Dir leftDir = {.dir = 0}, rightDir = {.dir = 1};
 
   while(ins != root &&
         GET_COLOR(ins->parent) == RED){
@@ -243,23 +301,33 @@ adjustInsert(
       ins = gp;
     }
     else{
+
+      //
+      // if uncle is left son of gp and ins is left son of p
+      // or uncle is right son of gp and ins is right son of p
+      // need to do a single rotation on p
+      //
+
       if(ins == p->left && !uncleDir){
-        rightRotate(p);
-        p = ins;
+        rotate(&p,rightDir);
+        assert(p == ins);
       }
       else if(ins == p->right && uncleDir){
-        leftRotate(p);
-        p = ins;
+        rotate(&p,leftDir);
+        assert(p == ins);
       }
 
+      //
+      // uncle and ins are of opposite direction
+      //
       SWAP_COLORS(p);
       SWAP_COLORS(gp);
 
       if(p == gp->left){
-        rightRotate(gp);
+        rotate(&gp,rightDir);
       }
       else{
-        leftRotate(gp);
+        rotate(&gp,leftDir);
       }
 
       break;
@@ -390,8 +458,16 @@ showRecursively(RBTree_t *t, Node *n){
     return;
   }
 
+  if(n->left)
+    printf("<---\n");
+
   showRecursively(t,n->left);
+  printf("node color is: %s\n",(n->color.rb ? "BLACK" : "RED"));
   TO_TREE(t)->show(n->key);
+
+  if(n->right)
+    printf("--->\n");
+
   showRecursively(t,n->right);
 }
 
@@ -403,6 +479,11 @@ showTree(RBTree_t *t){
   }
 
   Node *n = TO_TREE(t)->root;
+
+  printf("root is: \n");
+  TO_TREE(t)->show(n->key);
+  printf("printing the rest \n");
+
   showRecursively(t,n);
   return TRUE;
 }
