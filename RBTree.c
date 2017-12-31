@@ -215,52 +215,6 @@ rotate(Node **rot, const Dir dir){
   *rot = newParent;
 }
 
-/*static
-void
-leftRotate(Node **rot){
-  static
-  void
-  leftRotate(Node **rot){
-    Node *n = NULL,*right = NULL,*leftRight = NULL;
-
-    if(!rot && !(*rot)){
-      return;
-    }
-
-    n = *rot;
-    right = n->right;
-
-    // when we left rotate we have to have a right child
-    assert(right != NULL);
-
-    leftRight = (right ? right->left : NULL);
-    n->right = leftRight;
-
-    if(leftRight) {
-      leftRight->parent = n;
-    }
-
-    right->left = n;
-    right->parent = n->parent;
-
-    if(n->parent) {
-      if (n == n->parent->left) {
-        n->parent->left = right;
-      } else {
-        n->parent->right = right;
-      }
-
-      n->parent = right;
-    }
-    else{
-      assert(n == n->tree->root);
-      n->tree->root = right;
-    }
-
-    *rot = right;
-  }
-}*/
-
 static
 void
 adjustInsert(
@@ -334,7 +288,7 @@ adjustInsert(
     }
   }
 
-  COLOR_BLACK(root);
+  COLOR_BLACK(ins->tree->root);
 }
 
 static
