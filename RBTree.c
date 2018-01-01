@@ -328,6 +328,96 @@ getInsPoint(
 
 static
 bool
+adjustDelete(Node *nodeToFix){
+
+    Tree *t = nodeToFix->tree;
+
+    if(!nodeToFix){
+        //nothing to do
+        return TRUE;
+    }
+
+    while(nodeToFix != t->root &&
+            GET_COLOR(nodeToFix) == BLACK){
+
+
+
+    }
+
+
+}
+
+
+static
+bool
+delete(RBTree_t *tree,
+       void *toDelete){
+
+    Tree *treeImpl = TO_TREE(tree);
+    Node *deleteLoc = NULL;
+    Node *root = treeImpl->root;
+    Node *inOrder = NULL;
+    Node *inOrderChild = NULL;
+
+    if(!toDelete || !tree){
+        return FALSE;
+    }
+
+    if(!(deleteLoc =
+        findNode(root,toDelete))){
+        return FALSE;
+    }
+
+    if(!deleteLoc->left || !deleteLoc->right){
+        inOrder = deleteLoc;
+    }
+    else{
+        inOrder = deleteLoc->right;
+
+        while (inOrder->left){
+            inOrder = inOrder->left;
+        }
+    }
+
+    inOrderChild = inOrder->left ? inOrder->left : inOrder->right;
+    inOrderChild->parent = inOrder->parent;
+
+    //
+    // we want to update the parent of
+    // only child of inOrder (the node we are deleting)
+    //
+    if(inOrder->parent){
+        if(inOrderChild && inOrder->parent->left == inOrder){
+            inOrderChild->parent->left = inOrderChild;
+        }
+        else if(inOrderChild){
+            inOrderChild->parent->right = inOrderChild;
+        }
+    }
+    else{
+
+        //
+        //no parent -> inOrder is the root update the root
+        // to be the child of inOrder
+        //
+        assert(inOrder == root);
+        treeImpl->root = inOrderChild;
+    }
+
+    if(inOrder != deleteLoc){
+        deleteLoc->key = inOrder->key;
+    }
+
+    if(GET_COLOR(inOrder) == BLACK){
+        return adjustDelete(inOrderChild);
+    }
+
+    treeImpl->dealloc(inOrder);
+    return TRUE;
+}
+
+static
+bool
 insert(
     RBTree_t *tree,
     void *toInsert){
@@ -525,7 +615,7 @@ createRBTree(
   tree->dealloc = dealloc;
   tree->comparator = comparator;
   tree->api.insert = &insert;
-  tree->api.delete = NULL;
+  tree->api.delete = &delete;
   tree->api.find = &find;
 
 #ifdef _DEBUG_RBTREE_
