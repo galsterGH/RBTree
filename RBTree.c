@@ -333,7 +333,8 @@ adjustDelete(Node *nodeToFix){
     Tree *t = nodeToFix->tree;
 
     if(!nodeToFix){
-        //nothing to do
+
+
         return TRUE;
     }
 
@@ -377,38 +378,56 @@ delete(RBTree_t *tree,
         while (inOrder->left){
             inOrder = inOrder->left;
         }
-    }
+    }/
 
     inOrderChild = inOrder->left ? inOrder->left : inOrder->right;
-    inOrderChild->parent = inOrder->parent;
 
-    //
-    // we want to update the parent of
-    // only child of inOrder (the node we are deleting)
-    //
-    if(inOrder->parent){
-        if(inOrderChild && inOrder->parent->left == inOrder){
-            inOrderChild->parent->left = inOrderChild;
-        }
-        else if(inOrderChild){
-            inOrderChild->parent->right = inOrderChild;
-        }
-    }
-    else{
+    //if inOrder is not a leaf node
+    if(inOrderChild) {
+        inOrderChild->parent = inOrder->parent;
 
         //
-        //no parent -> inOrder is the root update the root
-        // to be the child of inOrder
+        // we want to update the parent of the
+        // only child of inOrder (the node we are deleting)
         //
-        assert(inOrder == root);
-        treeImpl->root = inOrderChild;
+
+        if(inOrder->parent){
+            if(inOrder->parent->left == inOrder){
+                inOrderChild->parent->left = inOrderChild;
+            }
+            else{
+                inOrderChild->parent->right = inOrderChild;
+            }
+        }
+        else{
+
+            //
+            //no parent -> inOrder is the root update the root
+            // to be the child of inOrder
+            //
+            assert(inOrder == root);
+            treeImpl->root = inOrderChild;
+        }
+    }
+    else if(treeImpl->root == inOrder){
+        treeImpl->root = NULL;
     }
 
-    if(inOrder != deleteLoc){
-        deleteLoc->key = inOrder->key;
-    }
+    //
+    // Update the keys such that the original node
+    // we wanted to delete has the key of the inOrder node which we'll be deleting
+    //
 
-    if(GET_COLOR(inOrder) == BLACK){
+    deleteLoc->key = inOrder->key;
+
+    if(inOrder != treeImpl->root &&
+            GET_COLOR(inOrder) == BLACK){
+
+        //
+        // inOrderChild has to exist given that inOrder is not the root
+        // and that it is black
+        //
+        assert(inOrderChild);
         return adjustDelete(inOrderChild);
     }
 
