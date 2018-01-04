@@ -5,9 +5,6 @@
 #include "RBTree.h"
 
 
-
-
-
 #define ALLOC(T,x,alloc,size,res) \
   do{\
      x = (T*)alloc(size);\
@@ -27,6 +24,8 @@
 #define GET_COLOR(n) ((n)->color).rb
 #define SWAP_COLORS(n) ((n)->color).rb++
 #define RIGHT_ROTATE(n) ((n).dir)
+#define LEFT_OF(n) ((n)->left)
+#define RIGHT_OF(n) ((n)->right)
 
 typedef struct{
     unsigned dir : 1;
@@ -334,17 +333,25 @@ bool
 adjustDelete(Node *nodeToFix){
 
     Tree *t = nodeToFix->tree;
-
-    if(!nodeToFix){
-
-
-        return TRUE;
-    }
+    Node *sibling = NULL, *p = NULL;
+    static Dir leftDir = {.dir = 0}, rightDir = {.dir = 1};
 
     while(nodeToFix != t->root &&
             GET_COLOR(nodeToFix) == BLACK){
 
+      if(nodeToFix == LEFT_OF(nodeToFix->parent)){
+        sibling = RIGHT_OF(nodeToFix->parent);
 
+        if(GET_COLOR(sibling) == RED){
+           COLOR_BLACK(sibling);
+           COLOR_RED(nodeToFix->parent);
+           p = nodeToFix->parent;
+           rotate(&p,leftDir);
+           sibling = RIGHT_OF(nodeToFix->parent)
+        }
+
+
+      }
 
     }
 
@@ -352,7 +359,7 @@ adjustDelete(Node *nodeToFix){
 }
 
 
-static
+Static
 bool
 delete(RBTree_t *tree,
        void *toDelete){
@@ -362,10 +369,21 @@ delete(RBTree_t *tree,
     Node *root = treeImpl->root;
     Node *inOrder = NULL;
     Node *inOrderChild = NULL;
+    Node setinel;
 
     if(!toDelete || !tree){
         return FALSE;
     }
+
+    //
+    // The sentinel will be used in the case of a leaf node
+    //
+
+    memset(&sentinel,0,sizeof(Node));
+    sentinel.color.rb = BLACK;
+    sentinel.tree = treeImpl;
+    sentinel.left = &sentinel;
+    sentinel.right = &sentinel;
 
     if(!(deleteLoc =
         findNode(root,toDelete))){
@@ -381,13 +399,13 @@ delete(RBTree_t *tree,
         while (inOrder->left){
             inOrder = inOrder->left;
         }
-    }/
+    }
 
-    inOrderChild = inOrder->left ? inOrder->left : inOrder->right;
+    inOrderChild = inOrder->left ? inOrder->left :
+      (inOrder->right ? inOrder->right : &sentinel);
 
-    //if inOrder is not a leaf node
-    if(inOrderChild) {
-        inOrderChild->parent = inOrder->parent;
+
+       inOrderChild->parent = inOrder->parent;
 
         //
         // we want to update the parent of the
@@ -411,10 +429,6 @@ delete(RBTree_t *tree,
             assert(inOrder == root);
             treeImpl->root = inOrderChild;
         }
-    }
-    else if(treeImpl->root == inOrder){
-        treeImpl->root = NULL;
-    }
 
     //
     // Update the keys such that the original node
@@ -423,8 +437,7 @@ delete(RBTree_t *tree,
 
     deleteLoc->key = inOrder->key;
 
-    if(inOrder != treeImpl->root &&
-            GET_COLOR(inOrder) == BLACK){
+    if(GET_COLOR(inOrder) == BLACK){
 
         //
         // inOrderChild has to exist given that inOrder is not the root
@@ -432,6 +445,21 @@ delete(RBTree_t *tree,
         //
         assert(inOrderChild);
         return adjustDelete(inOrderChild);
+    }
+
+    //
+    // make sure to disconnect the sentinel node from the tree
+    //
+
+    if(sentinel.parent){
+      if((sentinel.parent)->left == &sentinel){
+        (sentinel.parent)->left = NULL;
+      }
+      else if((sentinel.parent)->right == &sentinel){
+        (sentinel.parent)->right = NULL;
+      }
+
+      sentinel.parent = NULL;
     }
 
     treeImpl->dealloc(inOrder);
