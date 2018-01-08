@@ -336,30 +336,59 @@ adjustDelete(Node *nodeToFix){
     Node *sibling = NULL, *p = NULL;
     static Dir leftDir = {.dir = 0}, rightDir = {.dir = 1};
 
+    // we only deal with nodeToFix which is BLACK
+    // and is not the root - this is called double black node
     while(nodeToFix != t->root &&
-            GET_COLOR(nodeToFix) == BLACK){
+            GET_COLOR(nodeToFix) == BLACK) {
 
-      if(nodeToFix == LEFT_OF(nodeToFix->parent)){
-        sibling = RIGHT_OF(nodeToFix->parent);
+        if (nodeToFix == LEFT_OF(nodeToFix->parent)) {
+            sibling = RIGHT_OF(nodeToFix->parent);
 
-        if(GET_COLOR(sibling) == RED){
-           COLOR_BLACK(sibling);
-           COLOR_RED(nodeToFix->parent);
-           p = nodeToFix->parent;
-           rotate(&p,leftDir);
-           sibling = RIGHT_OF(nodeToFix->parent)
+            //sibling can't be NULL - if sibling is NULL that means that the tree was
+            // violating the RB properties (since nodeToFix has a black count of 2)
+            assert(sibling != NULL);
+
+            if (GET_COLOR(sibling) == RED) {
+                COLOR_BLACK(sibling);
+                COLOR_RED(nodeToFix->parent);
+                p = nodeToFix->parent;
+                rotate(&p, leftDir);
+                sibling = nodeToFix->parent->right;
+            }
+
+            if ((sibling->left == NULL ||
+                 GET_COLOR(sibling->left) == BLACK) &&
+                (sibling->right == NULL ||
+                 GET_COLOR(sibling->right) == BLACK)) {
+
+                COLOR_RED(sibling);
+                nodeToFix = nodeToFix->parent;
+            } else {
+                if(sibling->right == NULL ||
+                        GET_COLOR(sibling->right) == BLACK){
+
+                    COLOR_BLACK(sibling->left);
+                    COLOR_RED(sibling);
+                    rotate(&sibling,rightDir);
+                    sibling= nodeToFix->parent->right;
+                }
+
+                sibling->color = nodeToFix->parent->color;
+                COLOR_BLACK(nodeToFix->parent);
+                COLOR_BLACK(sibling->right);
+                p = nodeToFix->parent;
+                rotate(&p,leftDir);
+                nodeToFix = nodeToFix->tree->root;
+            }
         }
-
-
-      }
-
     }
 
-
+    // if nodeToFix is either the root or red
+    COLOR_BLACK(nodeToFix);
 }
 
 
-Static
+static
 bool
 delete(RBTree_t *tree,
        void *toDelete){
@@ -369,14 +398,15 @@ delete(RBTree_t *tree,
     Node *root = treeImpl->root;
     Node *inOrder = NULL;
     Node *inOrderChild = NULL;
-    Node setinel;
+    Node sentinel;
 
     if(!toDelete || !tree){
         return FALSE;
     }
 
     //
-    // The sentinel will be used in the case of a leaf node
+    // The sentinel will be used in the case of a black leaf node
+    // that is being deleted
     //
 
     memset(&sentinel,0,sizeof(Node));
@@ -404,7 +434,6 @@ delete(RBTree_t *tree,
     inOrderChild = inOrder->left ? inOrder->left :
       (inOrder->right ? inOrder->right : &sentinel);
 
-
        inOrderChild->parent = inOrder->parent;
 
         //
@@ -414,20 +443,23 @@ delete(RBTree_t *tree,
 
         if(inOrder->parent){
             if(inOrder->parent->left == inOrder){
-                inOrderChild->parent->left = inOrderChild;
+                inOrder->parent->left = inOrderChild;
             }
             else{
-                inOrderChild->parent->right = inOrderChild;
+                inOrder->parent->right = inOrderChild;
             }
         }
         else{
 
             //
-            //no parent -> inOrder is the root update the root
-            // to be the child of inOrder
+            // inOrder does not have a parent -> it is the root
             //
             assert(inOrder == root);
-            treeImpl->root = inOrderChild;
+            treeImpl->root = (inOrderChild == &sentinel ? NULL : inOrderChild);
+
+            if(!treeImpl->root){
+                return TRUE;
+            }
         }
 
     //
