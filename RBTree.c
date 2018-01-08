@@ -328,6 +328,71 @@ getInsPoint(
   return curr;
 }
 
+
+static
+void
+adjustDeleteByDir(Node **nodeToFix, Dir dir){
+  static Dir leftDir = {.dir = 0}, rightDir = {.dir = 1};
+  Tree *t = (*nodeToFix)->tree;
+  Node *curr = *nodeToFix,*sibling = NULL, *p = NULL;
+  sibling = dir.dir ? RIGHT_OF(curr->parent) : LEFT_OF(curr->parent);
+
+  //sibling can't be NULL - if sibling is NULL that means that the tree was
+  // violating the RB properties (since nodeToFix has a black count of 2)
+  assert(sibling != NULL);
+
+  if (GET_COLOR(sibling) == RED) {
+    COLOR_BLACK(sibling);
+    COLOR_RED(curr->parent);
+    p = curr->parent;
+    rotate(&p, (dir.dir ? leftDir : rightDir));
+    sibling = dir.dir ? curr->parent->right : curr->parent->left;
+  }
+
+  if ((sibling->left == NULL ||
+       GET_COLOR(sibling->left) == BLACK) &&
+      (sibling->right == NULL ||
+       GET_COLOR(sibling->right) == BLACK)) {
+
+    COLOR_RED(sibling);
+    *nodeToFix = &(nodeToFix->parent);
+  }
+  else {
+    if((dir.dir && (
+       sibling->right == NULL ||
+       GET_COLOR(sibling->right) == BLACK)) ||
+       (!dir.dir && (sibling->left == NULL || GET_COLOR(sibling->left) == BLACK))){
+
+      if(dir.dir){
+        COLOR_BLACK(sibling->left);
+        COLOR_RED(sibling);
+        rotate(&sibling,rightDir);
+        sibling= curr->parent->right;
+      }
+      else{
+        COLOR_BLACK(sibling->right);
+        COLOR_RED(sibling);
+        rotate(&sibling,leftDir);
+        sibling = curr->parent->left;
+      }
+    }
+
+    sibling->color = curr->parent->color;
+    COLOR_BLACK(curr->parent);
+
+    if(dir.dir){
+      COLOR_BLACK(sibling->right);
+    }
+    else{
+      COLOR_BLACK(sibling->left);
+    }
+
+    p = curr->parent;
+    rotate(&p,dir.dir ? leftDir : righDir);
+    nodeToFix = &(curr->tree->root);
+  }
+}
+
 static
 bool
 adjustDelete(Node *nodeToFix){
@@ -336,50 +401,17 @@ adjustDelete(Node *nodeToFix){
     Node *sibling = NULL, *p = NULL;
     static Dir leftDir = {.dir = 0}, rightDir = {.dir = 1};
 
+
     // we only deal with nodeToFix which is BLACK
     // and is not the root - this is called double black node
     while(nodeToFix != t->root &&
             GET_COLOR(nodeToFix) == BLACK) {
 
         if (nodeToFix == LEFT_OF(nodeToFix->parent)) {
-            sibling = RIGHT_OF(nodeToFix->parent);
-
-            //sibling can't be NULL - if sibling is NULL that means that the tree was
-            // violating the RB properties (since nodeToFix has a black count of 2)
-            assert(sibling != NULL);
-
-            if (GET_COLOR(sibling) == RED) {
-                COLOR_BLACK(sibling);
-                COLOR_RED(nodeToFix->parent);
-                p = nodeToFix->parent;
-                rotate(&p, leftDir);
-                sibling = nodeToFix->parent->right;
-            }
-
-            if ((sibling->left == NULL ||
-                 GET_COLOR(sibling->left) == BLACK) &&
-                (sibling->right == NULL ||
-                 GET_COLOR(sibling->right) == BLACK)) {
-
-                COLOR_RED(sibling);
-                nodeToFix = nodeToFix->parent;
-            } else {
-                if(sibling->right == NULL ||
-                        GET_COLOR(sibling->right) == BLACK){
-
-                    COLOR_BLACK(sibling->left);
-                    COLOR_RED(sibling);
-                    rotate(&sibling,rightDir);
-                    sibling= nodeToFix->parent->right;
-                }
-
-                sibling->color = nodeToFix->parent->color;
-                COLOR_BLACK(nodeToFix->parent);
-                COLOR_BLACK(sibling->right);
-                p = nodeToFix->parent;
-                rotate(&p,leftDir);
-                nodeToFix = nodeToFix->tree->root;
-            }
+          adjustDeleteByDir(&nodeToFix,rightDir);
+        }
+        else{
+          adjustDeleteByDir(&nodeToFix,leftDir);
         }
     }
 
