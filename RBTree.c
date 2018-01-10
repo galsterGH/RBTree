@@ -417,7 +417,7 @@ adjustDeleteByDir(Node **nodeToFix, Dir dir){
 }
 
 static
-bool
+void
 adjustDelete(Node *nodeToFix){
 
     Tree *t = nodeToFix->tree;
@@ -440,7 +440,6 @@ adjustDelete(Node *nodeToFix){
 
     // if nodeToFix is either the root or red
     COLOR_BLACK(nodeToFix);
-    return TRUE;
 }
 
 
