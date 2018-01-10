@@ -28,11 +28,11 @@ typedef void (*shower)(void*);
 
 RBTree_t *
 createRBTree(
-    Allocator alloc,
-    Deallocator dealloc,
-    Comparator comparator
+    const Allocator alloc,
+    const Deallocator dealloc,
+    const Comparator comparator
 #ifdef _DEBUG_RBTREE_
-    ,shower show
+    ,const shower show
 #endif
     );
 

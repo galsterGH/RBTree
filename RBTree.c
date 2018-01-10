@@ -63,12 +63,15 @@
     static
     Node*
     findNode(
-            Node *root,
-            void *toFind){
+        Node *root,
+        void *toFind){
 
         int res = 0;
+
         while(root){
-            res = root->tree->comparator(root->key,toFind);
+
+            res =
+                root->tree->comparator(root->key,toFind);
 
             if(!res){
                 break;
@@ -86,6 +89,7 @@
     static
     Node*
     getInorderSucc(Node *curr){
+
       Node *succ = NULL;
 
       if(!curr || !(curr->right)){
@@ -101,8 +105,13 @@
 
     static
     void
-    rotate(Node **rot, const Dir dir){
-        Node *n = NULL,*newParent = NULL,*newParentSon = NULL;
+    rotate(
+       Node **rot,
+       const Dir dir){
+
+        Node *n = NULL,
+             *newParent = NULL,
+             *newParentSon = NULL;
 
         if(!rot && !(*rot)){
           return;
@@ -234,6 +243,7 @@
       int res = 0;
 
       while(curr){
+
         res = comp(curr->key,key);
 
         if(res == 0){
@@ -261,6 +271,7 @@
     static
     void
     adjustDeleteByDir(Node **nodeToFix, Dir dir){
+
       static Dir leftDir = {.dir = 0}, rightDir = {.dir = 1};
       Tree *t = (*nodeToFix)->tree;
       Node *curr = *nodeToFix,*sibling = NULL, *p = NULL;
@@ -287,6 +298,7 @@
         *nodeToFix = (curr->parent);
       }
       else {
+
         if((dir.dir && (
            sibling->right == NULL ||
            GET_COLOR(sibling->right) == BLACK)) ||
@@ -402,6 +414,7 @@
             //
 
             if(inOrder->parent){
+
                 if(inOrder->parent->left == inOrder){
                     inOrder->parent->left = inOrderChild;
                 }
@@ -444,11 +457,12 @@
         //
 
         if(sentinel.parent){
+
           if((sentinel.parent)->left == &sentinel){
-            (sentinel.parent)->left = NULL;
+              (sentinel.parent)->left = NULL;
           }
           else if((sentinel.parent)->right == &sentinel){
-            (sentinel.parent)->right = NULL;
+              (sentinel.parent)->right = NULL;
           }
 
           sentinel.parent = NULL;
@@ -487,6 +501,7 @@
           COLOR_BLACK(*root);
         }
         else{
+
           insPoint = getInsPoint(*root,toInsert);
           assert(insPoint != NULL);
           res = comp(insPoint->key,toInsert);
@@ -504,6 +519,7 @@
           }
 
           toIns->parent = insPoint;
+
           if(GET_COLOR(insPoint) == RED){
             adjustInsert(toIns);
           }
@@ -513,9 +529,11 @@
     }
 
     #ifdef _DEBUG_RBTREE_
+
     static
     void
     showRecursively(RBTree_t *t, Node *n){
+
       if(!n){
         return;
       }
@@ -536,6 +554,7 @@
     static
     bool
     showTree(RBTree_t *t){
+
       if(!t || TO_TREE(t)->show == NULL){
         return FALSE;
       }
@@ -572,6 +591,7 @@
     static
     void
     deleteNodes(Node **root){
+
       //TODO - do it iteratively
       if(!(*root)){
         return;
@@ -583,14 +603,13 @@
       root = NULL;
     }
 
-
     RBTree_t *
     createRBTree(
-        Allocator alloc,
-        Deallocator dealloc,
-        Comparator comparator
+        const Allocator alloc,
+        const Deallocator dealloc,
+        const Comparator comparator
     #ifdef _DEBUG_RBTREE_
-        ,shower show
+        ,const shower show
     #endif
                  ){
 
