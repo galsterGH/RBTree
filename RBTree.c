@@ -24,6 +24,8 @@
 #define GET_COLOR(n) ((n)->color).rb
 #define SWAP_COLORS(n) ((n)->color).rb++
 #define RIGHT_ROTATE(n) ((n).dir)
+#define LEFT_OF(n) ((n)->left)
+#define RIGHT_OF(n) ((n)->right)
 
 typedef struct{
     unsigned dir : 1;
@@ -75,6 +77,29 @@ handleExpection(Node *curr){
   }
 
   return (1);
+}
+
+static
+Node*
+findNode(
+        Node *root,
+        void *toFind){
+
+    int res = 0;
+    while(root){
+        res = root->tree->comparator(root->key,toFind);
+
+        if(!res){
+            break;
+        }
+
+        if(res < 0)
+            root = root->right;
+        else
+            root = root->left;
+    }
+
+    return root;
 }
 
 static
@@ -326,6 +351,207 @@ getInsPoint(
   return curr;
 }
 
+
+static
+void
+adjustDeleteByDir(Node **nodeToFix, Dir dir){
+  static Dir leftDir = {.dir = 0}, rightDir = {.dir = 1};
+  Tree *t = (*nodeToFix)->tree;
+  Node *curr = *nodeToFix,*sibling = NULL, *p = NULL;
+  sibling = dir.dir ? RIGHT_OF(curr->parent) : LEFT_OF(curr->parent);
+
+  //sibling can't be NULL - if sibling is NULL that means that the tree was
+  // violating the RB properties (since nodeToFix has a black count of 2)
+  assert(sibling != NULL);
+
+  if (GET_COLOR(sibling) == RED) {
+    COLOR_BLACK(sibling);
+    COLOR_RED(curr->parent);
+    p = curr->parent;
+    rotate(&p, (dir.dir ? leftDir : rightDir));
+    sibling = dir.dir ? curr->parent->right : curr->parent->left;
+  }
+
+  if ((sibling->left == NULL ||
+       GET_COLOR(sibling->left) == BLACK) &&
+      (sibling->right == NULL ||
+       GET_COLOR(sibling->right) == BLACK)) {
+
+    COLOR_RED(sibling);
+    *nodeToFix = (curr->parent);
+  }
+  else {
+    if((dir.dir && (
+       sibling->right == NULL ||
+       GET_COLOR(sibling->right) == BLACK)) ||
+       (!dir.dir && (sibling->left == NULL || GET_COLOR(sibling->left) == BLACK))){
+
+      if(dir.dir){
+        COLOR_BLACK(sibling->left);
+        COLOR_RED(sibling);
+        rotate(&sibling,rightDir);
+        sibling= curr->parent->right;
+      }
+      else{
+        COLOR_BLACK(sibling->right);
+        COLOR_RED(sibling);
+        rotate(&sibling,leftDir);
+        sibling = curr->parent->left;
+      }
+    }
+
+    sibling->color = curr->parent->color;
+    COLOR_BLACK(curr->parent);
+
+    if(dir.dir){
+      COLOR_BLACK(sibling->right);
+    }
+    else{
+      COLOR_BLACK(sibling->left);
+    }
+
+    p = curr->parent;
+    rotate(&p,dir.dir ? leftDir : rightDir);
+    *nodeToFix = curr->tree->root;
+  }
+}
+
+static
+void
+adjustDelete(Node *nodeToFix){
+
+    Tree *t = nodeToFix->tree;
+    Node *sibling = NULL, *p = NULL;
+    static Dir leftDir = {.dir = 0}, rightDir = {.dir = 1};
+    
+    // we only deal with nodeToFix which is BLACK
+    // and is not the root - this is called double black node
+    while(nodeToFix != t->root &&
+            GET_COLOR(nodeToFix) == BLACK) {
+
+        if (nodeToFix == LEFT_OF(nodeToFix->parent)) {
+          adjustDeleteByDir(&nodeToFix,rightDir);
+        }
+        else{
+          adjustDeleteByDir(&nodeToFix,leftDir);
+        }
+    }
+
+    // if nodeToFix is either the root or red
+    COLOR_BLACK(nodeToFix);
+}
+
+
+static
+bool
+delete(RBTree_t *tree,
+       void *toDelete){
+
+    Tree *treeImpl = TO_TREE(tree);
+    Node *deleteLoc = NULL;
+    Node *root = treeImpl->root;
+    Node *inOrder = NULL;
+    Node *inOrderChild = NULL;
+    Node sentinel;
+
+    if(!toDelete || !tree){
+        return FALSE;
+    }
+
+    //
+    // The sentinel will be used in the case of a black leaf node
+    // that is being deleted
+    //
+
+    memset(&sentinel,0,sizeof(Node));
+    sentinel.color.rb = BLACK;
+    sentinel.tree = treeImpl;
+    sentinel.left = &sentinel;
+    sentinel.right = &sentinel;
+
+    if(!(deleteLoc =
+        findNode(root,toDelete))){
+        return FALSE;
+    }
+
+    if(!deleteLoc->left || !deleteLoc->right){
+        inOrder = deleteLoc;
+    }
+    else{
+        inOrder = deleteLoc->right;
+
+        while (inOrder->left){
+            inOrder = inOrder->left;
+        }
+    }
+
+    inOrderChild = inOrder->left ? inOrder->left :
+      (inOrder->right ? inOrder->right : &sentinel);
+
+       inOrderChild->parent = inOrder->parent;
+
+        //
+        // we want to update the parent of the
+        // only child of inOrder (the node we are deleting)
+        //
+
+        if(inOrder->parent){
+            if(inOrder->parent->left == inOrder){
+                inOrder->parent->left = inOrderChild;
+            }
+            else{
+                inOrder->parent->right = inOrderChild;
+            }
+        }
+        else{
+
+            //
+            // inOrder does not have a parent -> it is the root
+            //
+            assert(inOrder == root);
+            treeImpl->root = (inOrderChild == &sentinel ? NULL : inOrderChild);
+
+            if(!treeImpl->root){
+                return TRUE;
+            }
+        }
+
+    //
+    // Update the keys such that the original node
+    // we wanted to delete has the key of the inOrder node which we'll be deleting
+    //
+
+    deleteLoc->key = inOrder->key;
+
+    if(GET_COLOR(inOrder) == BLACK){
+
+        //
+        // inOrderChild has to exist given that inOrder is not the root
+        // and that it is black
+        //
+        assert(inOrderChild);
+        adjustDelete(inOrderChild);
+    }
+
+    //
+    // make sure to disconnect the sentinel node from the tree
+    //
+
+    if(sentinel.parent){
+      if((sentinel.parent)->left == &sentinel){
+        (sentinel.parent)->left = NULL;
+      }
+      else if((sentinel.parent)->right == &sentinel){
+        (sentinel.parent)->right = NULL;
+      }
+
+      sentinel.parent = NULL;
+    }
+
+    treeImpl->dealloc(inOrder);
+    return TRUE;
+}
+
 static
 bool
 insert(
@@ -380,30 +606,6 @@ insert(
     return (TRUE);
 }
 
-static
-Node*
-findNode(
-    Node *root,
-    void *toFind){
-
-  int res = 0;
-  while(root){
-    res = root->tree->comparator(root->key,toFind);
-
-    if(!res){
-      break;
-    }
-
-    if(res < 0)
-      root = root->right;
-    else
-      root = root->left;
-  }
-
-  return root;
-}
-
-
 #ifdef _DEBUG_RBTREE_
 static
 void
@@ -441,7 +643,6 @@ showTree(RBTree_t *t){
   showRecursively(t,n);
   return TRUE;
 }
-
 #endif
 
 static
@@ -525,7 +726,7 @@ createRBTree(
   tree->dealloc = dealloc;
   tree->comparator = comparator;
   tree->api.insert = &insert;
-  tree->api.delete = NULL;
+  tree->api.delete = &delete;
   tree->api.find = &find;
 
 #ifdef _DEBUG_RBTREE_
