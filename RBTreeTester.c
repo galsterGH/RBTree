@@ -111,12 +111,49 @@
         for(; i < sizeof(arrP)/ sizeof(Pair); ++i){
             printf("----- inserting i %d -------\n",i);
             t->insert(t,&arrP[i]);
-            t->showTree(t);
         }
+
+        t->showTree(t);
+    }
+
+    void testDelete1() {
+
+        RBTree_t *t = createRBTree(alloc,
+                                   dealloc,
+                                   test1Comp,
+                                   test1Show);
+
+        if (!t) {
+            printf("error creating tree");
+            exit(1);
+        }
+
+        int i = 38;
+        int j = 27;
+        int k = 28;
+        int l = 12;
+        int m = 67;
+        int n = 71;
+        int o = 73;
+        int p = 93;
+        t->insert(t, &i);
+        t->insert(t, &j);
+        t->insert(t, &k);
+        t->insert(t, &l);
+        t->insert(t, &m);
+        t->insert(t, &n);
+        t->insert(t, &o);
+        t->insert(t, &p);
+        //t->showTree(t);
+
+        t->delete(t,&j);
+        t->delete(t,&i);
+        t->showTree(t);
+
     }
 
     int main(){
 
-      testInsert2();
+      testDelete1();
       return 0;
     }

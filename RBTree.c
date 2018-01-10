@@ -81,6 +81,29 @@ handleExpection(Node *curr){
 
 static
 Node*
+findNode(
+        Node *root,
+        void *toFind){
+
+    int res = 0;
+    while(root){
+        res = root->tree->comparator(root->key,toFind);
+
+        if(!res){
+            break;
+        }
+
+        if(res < 0)
+            root = root->right;
+        else
+            root = root->left;
+    }
+
+    return root;
+}
+
+static
+Node*
 getInorderSucc(Node *curr){
   Node *succ = NULL;
 
@@ -355,7 +378,7 @@ adjustDeleteByDir(Node **nodeToFix, Dir dir){
        GET_COLOR(sibling->right) == BLACK)) {
 
     COLOR_RED(sibling);
-    *nodeToFix = &(nodeToFix->parent);
+    *nodeToFix = (curr->parent);
   }
   else {
     if((dir.dir && (
@@ -388,8 +411,8 @@ adjustDeleteByDir(Node **nodeToFix, Dir dir){
     }
 
     p = curr->parent;
-    rotate(&p,dir.dir ? leftDir : righDir);
-    nodeToFix = &(curr->tree->root);
+    rotate(&p,dir.dir ? leftDir : rightDir);
+    *nodeToFix = curr->tree->root;
   }
 }
 
@@ -417,6 +440,7 @@ adjustDelete(Node *nodeToFix){
 
     // if nodeToFix is either the root or red
     COLOR_BLACK(nodeToFix);
+    return TRUE;
 }
 
 
@@ -508,7 +532,7 @@ delete(RBTree_t *tree,
         // and that it is black
         //
         assert(inOrderChild);
-        return adjustDelete(inOrderChild);
+        adjustDelete(inOrderChild);
     }
 
     //
@@ -583,30 +607,6 @@ insert(
 
     return (TRUE);
 }
-
-static
-Node*
-findNode(
-    Node *root,
-    void *toFind){
-
-  int res = 0;
-  while(root){
-    res = root->tree->comparator(root->key,toFind);
-
-    if(!res){
-      break;
-    }
-
-    if(res < 0)
-      root = root->right;
-    else
-      root = root->left;
-  }
-
-  return root;
-}
-
 
 #ifdef _DEBUG_RBTREE_
 static
