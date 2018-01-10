@@ -423,8 +423,7 @@ adjustDelete(Node *nodeToFix){
     Tree *t = nodeToFix->tree;
     Node *sibling = NULL, *p = NULL;
     static Dir leftDir = {.dir = 0}, rightDir = {.dir = 1};
-
-
+    
     // we only deal with nodeToFix which is BLACK
     // and is not the root - this is called double black node
     while(nodeToFix != t->root &&
@@ -644,7 +643,6 @@ showTree(RBTree_t *t){
   showRecursively(t,n);
   return TRUE;
 }
-
 #endif
 
 static
