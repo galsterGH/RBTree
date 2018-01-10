@@ -4,16 +4,6 @@
 #include <string.h>
 #include "RBTree.h"
 
-
-#define ALLOC(T,x,alloc,size,res) \
-  do{\
-     x = (T*)alloc(size);\
-      if(!x){\
-         return res;\
-      }\
-      memset(x,0,size);\
-  }while(0)
-
 #define FALSE (0)
 #define TRUE (1)
 #define RED (0)
@@ -27,10 +17,19 @@
 #define LEFT_OF(n) ((n)->left)
 #define RIGHT_OF(n) ((n)->right)
 
+#define ALLOC(T,x,alloc,size,res) \
+  do{\
+     x = (T*)alloc(size);\
+      if(!x){\
+         return res;\
+      }\
+      memset(x,0,size);\
+  }while(0)
+
+
 typedef struct{
     unsigned dir : 1;
 }Dir;
-
 
 //forward declare RBTreeImpl
 struct RBTreeImpl;
@@ -60,24 +59,6 @@ struct RBTreeImpl{
   shower show;
 #endif
 }Tree;
-
-
-typedef
-struct RBIterImpl{
-  RBIter_t iterBase;
-  Node *currNode;
-}Iterator;
-
-
-static
-int
-handleExpection(Node *curr){
-  if(curr){
-    curr->tree->dealloc(curr);
-  }
-
-  return (1);
-}
 
 static
 Node*
@@ -117,81 +98,6 @@ getInorderSucc(Node *curr){
 
   return succ;
 }
-
-/*
-static
-bool
-hasNext(RBIter_t *it){
-
-  Iterator iter = ((Iterator*)it);
-  Node *curr = NULL;
-
-  if(!iter){
-    return false;
-  }
-
-  curr = iter->currNode;
-  assert(curr);
-
-  if(curr->right || curr->parent){
-    return TRUE;
-  }
-
-  return FALSE;
-}
-
-
-static
-bool
-hasPrev(RBIter_t *it){
-
-  Iterator iter = ((Iterator*)it);
-  Node *curr = NULL;
-
-  if(!iter){
-    return false;
-  }
-
-  curr = iter->currNode;
-  assert(curr);
-
-  if(curr->left || curr->parent){
-    return TRUE;
-  }
-
-  return FALSE;
-}
-
-static
-RBIter_t*
-getNext(RBIter_t *it){
-  Iterator *iter = ((Iterator*)it);
-  Node *curr = NULL, *toRet = NULL;
-  Iterator *result = NULL;
-  assert(it);
-  curr = iter->currNode;
-  assert(curr);
-
-  if(curr->right){
-    toRet = getInorderSucc(curr);
-  }
-  else{
-    toRet = curr->p;
-  }
-
-  ALLOC(Iterator,
-        result,
-        curr->tree->alloc,
-        sizeof(Iterator),
-        handleExpection(iter));
-
-  result->currNode = toRet;
-  memcpy(&(result->iterBase),*it,sizeof(RBIter_t));
-  curr->tree->dealloc(it);
-  return &(result->iterBase);
-}
-
-*/
 
 static
 void
