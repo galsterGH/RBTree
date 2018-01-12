@@ -3,6 +3,7 @@
     #include <assert.h>
     #include <string.h>
     #include "RBTree.h"
+    #include "RBTreeImpl.h"
 
     #define FALSE (0)
     #define TRUE (1)
@@ -30,35 +31,6 @@
     typedef struct{
         unsigned dir : 1;
     }Dir;
-
-    //forward declare RBTreeImpl
-    struct RBTreeImpl;
-
-    typedef
-    struct RBNode{
-      void *key;
-      struct RBNode *left;
-      struct RBNode *right;
-      struct RBNode *parent;
-      struct RBTreeImpl *tree;
-
-      struct Color{
-        unsigned rb : 1;
-      }color;
-
-    }Node;
-
-    typedef
-    struct RBTreeImpl{
-       RBTree_t api;
-       Node *root;
-       Allocator alloc;
-       Deallocator dealloc;
-       Comparator comparator;
-    #ifdef _DEBUG_RBTREE_
-      shower show;
-    #endif
-    }Tree;
 
     static
     Node*
@@ -589,6 +561,23 @@
     }
 
     static
+    RBIter_t*
+    getIterator(RBTree_t *tree){
+
+        Node *root = NULL;
+
+        if(!tree || ((root = TO_TREE(tree)->root) == NULL)) {
+            return NULL;
+        }
+
+        while(root->left){
+            root = root->left;
+        }
+
+        return getIteratorFromNode(root);
+    }
+
+    static
     void
     deleteNodes(Node **root){
 
@@ -622,6 +611,7 @@
       tree->api.insert = &insert;
       tree->api.delete = &delete;
       tree->api.find = &find;
+      tree->api.getIterator = &getIterator;
 
     #ifdef _DEBUG_RBTREE_
       tree->show = show;

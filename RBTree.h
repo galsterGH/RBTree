@@ -8,15 +8,29 @@
 typedef int bool;
 typedef int compRes;
 
+struct RBIter_t;
+
 typedef
 struct RBTree{
     bool  (*insert) (struct RBTree* ,void *toInsert);
     bool (*delete) (struct RBTree*, void *toDelete);
     void*  (*find)(struct RBTree*, void *key);
+
 #ifdef _DEBUG_RBTREE_
     bool (*showTree)(struct RBTree*);
 #endif
+
+    struct RBIter_t* (*getIterator)(struct RBTree*);
+
 }RBTree_t;
+
+
+typedef
+struct RBIter{
+    bool (*hasNext)(struct RBIter*);
+    struct RBIter* (*getNext)(struct RBIter*);
+}RBIter_t;
+
 
 typedef void* (*Allocator)(size_t sizeToAllocate);
 typedef void (*Deallocator)(void*);
