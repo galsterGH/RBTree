@@ -2,31 +2,8 @@
     #include <stdlib.h>
     #include <assert.h>
     #include <string.h>
-    #include "RBTree.h"
     #include "RBTreeImpl.h"
-
-    #define FALSE (0)
-    #define TRUE (1)
-    #define RED (0)
-    #define BLACK (1)
-    #define TO_TREE(t) ((Tree*)(t))
-    #define COLOR_RED(n) ((n)->color).rb = RED
-    #define COLOR_BLACK(n) ((n)->color).rb = BLACK
-    #define GET_COLOR(n) ((n)->color).rb
-    #define SWAP_COLORS(n) ((n)->color).rb++
-    #define RIGHT_ROTATE(n) ((n).dir)
-    #define LEFT_OF(n) ((n)->left)
-    #define RIGHT_OF(n) ((n)->right)
-
-    #define ALLOC(T,x,alloc,size,res) \
-      do{\
-         x = (T*)alloc(size);\
-          if(!x){\
-             return res;\
-          }\
-          memset(x,0,size);\
-      }while(0)
-
+    #include "RBIterator.h"
 
     typedef struct{
         unsigned dir : 1;
@@ -562,7 +539,7 @@
 
     static
     RBIter_t*
-    getIterator(RBTree_t *tree){
+    getIterator(RBIter_t *tree){
 
         Node *root = NULL;
 
@@ -570,11 +547,10 @@
             return NULL;
         }
 
-        while(root->left){
-            root = root->left;
-        }
-
-        return getIteratorFromNode(root);
+        return getIteratorFromNode(
+                root,
+                TO_TREE(tree)->alloc,
+                TO_TREE(tree)->dealloc);
     }
 
     static

@@ -11,10 +11,9 @@ struct RBIterImpl{
 
 
 RBIter_t*
-getIteratorFromNode(const Node *from);
-
-RBIter_t*
-getNextIterator(RBIter_t *curr);
-
+getIteratorFromNode(
+        Node *from,
+        Allocator alloc,
+        Deallocator dalloc);
 
 #endif

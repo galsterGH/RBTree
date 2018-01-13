@@ -8,7 +8,11 @@
 typedef int bool;
 typedef int compRes;
 
-struct RBIter_t;
+
+typedef
+struct RBIter{
+    struct RBIter* (*getNext)(struct RBIter*);
+}RBIter_t;
 
 typedef
 struct RBTree{
@@ -20,16 +24,9 @@ struct RBTree{
     bool (*showTree)(struct RBTree*);
 #endif
 
-    struct RBIter_t* (*getIterator)(struct RBTree*);
+    RBIter_t* (*getIterator)(RBIter_t*);
 
 }RBTree_t;
-
-
-typedef
-struct RBIter{
-    bool (*hasNext)(struct RBIter*);
-    struct RBIter* (*getNext)(struct RBIter*);
-}RBIter_t;
 
 
 typedef void* (*Allocator)(size_t sizeToAllocate);
