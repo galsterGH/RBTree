@@ -152,8 +152,56 @@
 
     }
 
+    void testIteration(){
+
+        RBIter_t *iter = NULL;
+        RBTree_t *t =
+            createRBTree(
+               alloc,
+               dealloc,
+               test1Comp,
+               test1Show);
+
+        if (!t) {
+            printf("error creating tree");
+            exit(1);
+        }
+
+        int i = 38;
+        int j = 27;
+        int k = 28;
+        int l = 12;
+        int m = 67;
+        int n = 71;
+        int o = 73;
+        int p = 93;
+        t->insert(t, &i);
+        t->insert(t, &j);
+        t->insert(t, &k);
+        t->insert(t, &l);
+        t->insert(t, &m);
+        t->insert(t, &n);
+        t->insert(t, &o);
+        t->insert(t, &p);
+
+        for(iter = t->getIterator(t);
+            iter != NULL;
+            iter = iter->getNext(iter)){
+
+            int *curr = (int*)(iter->get(iter));
+
+            if(!curr){
+                break;
+            }
+
+            printf("%d\n",*curr);
+        }
+
+        deleteRBTree(t);
+    }
+
     int main(){
 
-      testDelete1();
+      testIteration();
       return 0;
     }
