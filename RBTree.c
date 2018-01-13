@@ -1,7 +1,3 @@
-    #include <stdio.h>
-    #include <stdlib.h>
-    #include <assert.h>
-    #include <string.h>
     #include "RBTreeImpl.h"
     #include "RBIterator.h"
 
@@ -539,7 +535,7 @@
 
     static
     RBIter_t*
-    getIterator(RBIter_t *tree){
+    getIterator(RBTree_t *tree){
 
         Node *root = NULL;
 
@@ -565,7 +561,7 @@
       deleteNodes(&((*root)->left));
       deleteNodes(&((*root)->right));
       (*root)->tree->dealloc(*root);
-      root = NULL;
+      *root = NULL;
     }
 
     RBTree_t *
@@ -604,7 +600,7 @@
         return TRUE;
       }
 
-      deleteNodes(&(TO_TREE(tree)->root));
+      deleteNodes(&((TO_TREE(tree)->root)));
       TO_TREE(tree)->dealloc(tree);
       return TRUE;
     }

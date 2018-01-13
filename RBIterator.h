@@ -5,8 +5,10 @@
 
 typedef
 struct RBIterImpl{
-    RBIter_t *api;
+    RBIter_t api;
     Node *currNode;
+    Allocator alloc;
+    Deallocator dalloc;
 } RBIterImpl_t;
 
 

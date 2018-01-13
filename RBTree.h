@@ -12,6 +12,7 @@ typedef int compRes;
 typedef
 struct RBIter{
     struct RBIter* (*getNext)(struct RBIter*);
+    void* (*get)(struct RBIter*);
 }RBIter_t;
 
 typedef
@@ -24,8 +25,7 @@ struct RBTree{
     bool (*showTree)(struct RBTree*);
 #endif
 
-    RBIter_t* (*getIterator)(RBIter_t*);
-
+    RBIter_t* (*getIterator)(struct RBTree*);
 }RBTree_t;
 
 
