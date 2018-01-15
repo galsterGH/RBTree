@@ -11,7 +11,6 @@ struct RBIterImpl{
     Deallocator dalloc;
 } RBIterImpl_t;
 
-
 RBIter_t*
 getIteratorFromNode(
         Node *from,

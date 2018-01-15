@@ -56,6 +56,7 @@ struct RBTreeImpl{
 #ifdef _DEBUG_RBTREE_
     shower show;
 #endif
+    OnDeleteCB deleteCB;
 }Tree;
 
 #endif

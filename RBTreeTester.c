@@ -1,7 +1,5 @@
     #include <stdio.h>
     #include <stdlib.h>
-
-    #define _DEBUG_RBTREE_
     #include "RBTree.h"
 
     typedef struct {
@@ -47,8 +45,7 @@
     void testInsert1(){
         RBTree_t *t = createRBTree(alloc,
                                    dealloc,
-                                   test1Comp,
-                                   test1Show);
+                                   test1Comp);
 
         if(!t){
             printf("error creating tree");
@@ -63,35 +60,34 @@
         int n = 100;
         t->insert(t,&i);
         printf("*****\n");
-        t->showTree(t);
+        //t->showTree(t);
         printf("-------\n");
         t->insert(t,&j);
         printf("*****\n");
-        t->showTree(t);
+        //t->showTree(t);
         printf("-------\n");
         t->insert(t,&l);
         printf("*****\n");
-        t->showTree(t);
+        //t->showTree(t);
         printf("-------\n");
         t->insert(t,&k);
         printf("*****\n");
-        t->showTree(t);
+        //t->showTree(t);
         printf("-------\n");
         t->insert(t,&m);
         printf("*****\n");
-        t->showTree(t);
+        //t->showTree(t);
         printf("-------\n");
         t->insert(t,&n);
         printf("*****\n");
-        t->showTree(t);
+        //t->showTree(t);
         printf("-------\n");
     }
 
     void testInsert2() {
         RBTree_t *t = createRBTree(alloc,
                                    dealloc,
-                                   test2Comp,
-                                   test2Show);
+                                   test2Comp);
 
         int i = 0;
         if (!t) {
@@ -113,15 +109,14 @@
             t->insert(t,&arrP[i]);
         }
 
-        t->showTree(t);
+       // t->showTree(t);
     }
 
     void testDelete1() {
 
         RBTree_t *t = createRBTree(alloc,
                                    dealloc,
-                                   test1Comp,
-                                   test1Show);
+                                   test1Comp);
 
         if (!t) {
             printf("error creating tree");
@@ -148,7 +143,7 @@
 
         t->delete(t,&j);
         t->delete(t,&i);
-        t->showTree(t);
+       // t->showTree(t);
 
     }
 
@@ -159,8 +154,7 @@
             createRBTree(
                alloc,
                dealloc,
-               test1Comp,
-               test1Show);
+               test1Comp);
 
         if (!t) {
             printf("error creating tree");

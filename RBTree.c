@@ -413,6 +413,10 @@
           sentinel.parent = NULL;
         }
 
+        if(treeImpl->deleteCB){
+            treeImpl->deleteCB(inOrder->key);
+        }
+
         treeImpl->dealloc(inOrder);
         return TRUE;
     }
@@ -560,6 +564,11 @@
 
       deleteNodes(&((*root)->left));
       deleteNodes(&((*root)->right));
+
+      if((*root)->tree->deleteCB){
+          (*root)->tree->deleteCB((*root)->key);
+      }
+
       (*root)->tree->dealloc(*root);
       *root = NULL;
     }
@@ -591,6 +600,34 @@
     #endif
 
       return &(tree->api);
+    }
+
+    RBTree_t *
+    createRBTreeWithCB(
+            const Allocator alloc,
+            const Deallocator dealloc,
+            const Comparator comparator,
+#ifdef _DEBUG_RBTREE_
+            const shower show,
+#endif
+        const OnDeleteCB delCB
+    ){
+        Tree *tree =
+                createRBTree(
+                        alloc,
+                        dealloc,
+                        comparator
+#ifdef _DEBUG_RBTREE_
+        ,show
+#endif
+                );
+
+        if(!tree){
+            return NULL;
+        }
+
+        tree->deleteCB = delCB;
+        return &(tree->api);
     }
 
     bool
