@@ -15,7 +15,7 @@ struct RBIter{
 typedef
 struct RBTree{
     BOOL  (*insert) (struct RBTree* ,void *toInsert);
-    BOOL (*delete) (struct RBTree*, void *toDelete);
+    BOOL (*del) (struct RBTree*, void *toDelete);
     void*  (*find)(struct RBTree*, void *key);
 
 #ifdef _DEBUG_RBTREE_

@@ -307,7 +307,7 @@
 
     static
     BOOL
-    delete(RBTree_t *tree,
+    del(RBTree_t *tree,
            void *toDelete){
 
         Tree *treeImpl = TO_TREE(tree);
@@ -590,7 +590,7 @@
       tree->dealloc = dealloc;
       tree->comparator = comparator;
       tree->api.insert = &insert;
-      tree->api.delete = &delete;
+      tree->api.del = &del;
       tree->api.find = &find;
       tree->api.getIterator = &getIterator;
 

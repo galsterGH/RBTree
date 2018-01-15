@@ -141,10 +141,9 @@
         t->insert(t, &p);
         //t->showTree(t);
 
-        t->delete(t,&j);
-        t->delete(t,&i);
+        t->del(t,&j);
+        t->del(t,&i);
        // t->showTree(t);
-
     }
 
     void testIteration(){
