@@ -306,7 +306,7 @@
 
 
     static
-    bool
+    BOOL
     delete(RBTree_t *tree,
            void *toDelete){
 
@@ -422,7 +422,7 @@
     }
 
     static
-    bool
+    BOOL
     insert(
         RBTree_t *tree,
         void *toInsert){
@@ -501,7 +501,7 @@
     }
 
     static
-    bool
+    BOOL
     showTree(RBTree_t *t){
 
       if(!t || TO_TREE(t)->show == NULL){
@@ -630,7 +630,7 @@
         return &(tree->api);
     }
 
-    bool
+    BOOL
     deleteRBTree(RBTree_t *tree){
 
       if(!tree){

@@ -3,7 +3,7 @@
 
 #include <stddef.h>
 
-typedef int bool;
+typedef int BOOL;
 typedef int compRes;
 
 typedef
@@ -14,12 +14,12 @@ struct RBIter{
 
 typedef
 struct RBTree{
-    bool  (*insert) (struct RBTree* ,void *toInsert);
-    bool (*delete) (struct RBTree*, void *toDelete);
+    BOOL  (*insert) (struct RBTree* ,void *toInsert);
+    BOOL (*delete) (struct RBTree*, void *toDelete);
     void*  (*find)(struct RBTree*, void *key);
 
 #ifdef _DEBUG_RBTREE_
-    bool (*showTree)(struct RBTree*);
+    BOOL (*showTree)(struct RBTree*);
 #endif
 
     RBIter_t* (*getIterator)(struct RBTree*);
@@ -56,8 +56,7 @@ createRBTreeWithCB(
         const OnDeleteCB deleteCB
 );
 
-
-bool
+BOOL
 deleteRBTree(
     RBTree_t*);
 
