@@ -5,61 +5,13 @@
 		<Option title="RBTree"/>
 		<Option makefile_is_custom="1"/>
 		<Option compiler="gcc"/>
-		<Option virtualFolders="CMake Files\;"/>
+		<Option virtualFolders="CMake Files\;CMake Files\RBTreeImpl\;CMake Files\RBTreeLib\;"/>
 		<Build>
 			<Target title="all">
 				<Option working_dir="C:/Users/guyal/myProjects/RBTree/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
 					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="rebuild_cache">
-				<Option working_dir="C:/Users/guyal/myProjects/RBTree/cmake-build-debug"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="RBTree">
-				<Option output="C:/Users/guyal/myProjects/RBTree/cmake-build-debug/RBTree.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="C:/Users/guyal/myProjects/RBTree/cmake-build-debug"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/include"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/../../../../include"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/include-fixed"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/../../../../mingw32/include"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/Makefile&quot;  VERBOSE=1 RBTree"/>
-					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="RBTree/fast">
-				<Option output="C:/Users/guyal/myProjects/RBTree/cmake-build-debug/RBTree.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="C:/Users/guyal/myProjects/RBTree/cmake-build-debug"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/include"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/../../../../include"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/include-fixed"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/../../../../mingw32/include"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/Makefile&quot;  VERBOSE=1 RBTree/fast"/>
 					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
@@ -75,18 +27,141 @@
 					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="C:/Users/guyal/myProjects/RBTree/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="RBTreeImpl">
+				<Option output="C:/Users/guyal/myProjects/RBTree/cmake-build-debug/RBTreeImpl/RBTreeImpl.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/guyal/myProjects/RBTree/cmake-build-debug/RBTreeImpl"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/Users/guyal/myProjects/RBTree/RBTreeLib"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/include/c++"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/include/c++/mingw32"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/include/c++/backward"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/../../../../include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/include-fixed"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/../../../../mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/RBTreeImpl/Makefile&quot;  VERBOSE=1 RBTreeImpl"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/RBTreeImpl/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/RBTreeImpl/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/RBTreeImpl/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="RBTreeImpl/fast">
+				<Option output="C:/Users/guyal/myProjects/RBTree/cmake-build-debug/RBTreeImpl/RBTreeImpl.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/guyal/myProjects/RBTree/cmake-build-debug/RBTreeImpl"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/Users/guyal/myProjects/RBTree/RBTreeLib"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/include/c++"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/include/c++/mingw32"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/include/c++/backward"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/../../../../include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/include-fixed"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/../../../../mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/RBTreeImpl/Makefile&quot;  VERBOSE=1 RBTreeImpl/fast"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/RBTreeImpl/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/RBTreeImpl/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/RBTreeImpl/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="RBTreeLib">
+				<Option output="C:/Users/guyal/myProjects/RBTree/cmake-build-debug/RBTreeLib/libRBTreeLib.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/guyal/myProjects/RBTree/cmake-build-debug/RBTreeLib"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/Users/guyal/myProjects/RBTree/RBTreeLib"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/include/c++"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/include/c++/mingw32"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/include/c++/backward"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/../../../../include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/include-fixed"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/../../../../mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/RBTreeLib/Makefile&quot;  VERBOSE=1 RBTreeLib"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/RBTreeLib/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/RBTreeLib/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/RBTreeLib/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="RBTreeLib/fast">
+				<Option output="C:/Users/guyal/myProjects/RBTree/cmake-build-debug/RBTreeLib/libRBTreeLib.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/guyal/myProjects/RBTree/cmake-build-debug/RBTreeLib"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/Users/guyal/myProjects/RBTree/RBTreeLib"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/include/c++"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/include/c++/mingw32"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/include/c++/backward"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/../../../../include"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/include-fixed"/>
+					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/../../../../mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/RBTreeLib/Makefile&quot;  VERBOSE=1 RBTreeLib/fast"/>
+					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/RBTreeLib/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/RBTreeLib/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/RBTreeLib/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
 		</Build>
-		<Unit filename="C:/Users/guyal/myProjects/RBTree/RBTree.c">
-			<Option target="RBTree"/>
+		<Unit filename="C:/Users/guyal/myProjects/RBTree/RBTreeImpl/main.cpp">
+			<Option target="RBTreeImpl"/>
 		</Unit>
-		<Unit filename="C:/Users/guyal/myProjects/RBTree/RBTree.h">
-			<Option target="RBTree"/>
+		<Unit filename="C:/Users/guyal/myProjects/RBTree/src/RBIterator.c">
+			<Option target="RBTreeLib"/>
 		</Unit>
-		<Unit filename="C:/Users/guyal/myProjects/RBTree/RBTreeTester.c">
-			<Option target="RBTree"/>
+		<Unit filename="C:/Users/guyal/myProjects/RBTree/src/RBIterator.h">
+			<Option target="RBTreeLib"/>
+		</Unit>
+		<Unit filename="C:/Users/guyal/myProjects/RBTree/src/RBTree.c">
+			<Option target="RBTreeLib"/>
+		</Unit>
+		<Unit filename="C:/Users/guyal/myProjects/RBTree/src/RBTree.h">
+			<Option target="RBTreeLib"/>
+		</Unit>
+		<Unit filename="C:/Users/guyal/myProjects/RBTree/src/RBTreeImpl.h">
+			<Option target="RBTreeLib"/>
 		</Unit>
 		<Unit filename="C:/Users/guyal/myProjects/RBTree/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="C:/Users/guyal/myProjects/RBTree/RBTreeImpl/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\RBTreeImpl\"/>
+		</Unit>
+		<Unit filename="C:/Users/guyal/myProjects/RBTree/RBTreeImpl/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\RBTreeImpl\"/>
+		</Unit>
+		<Unit filename="C:/Users/guyal/myProjects/RBTree/RBTreeLib/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\RBTreeLib\"/>
+		</Unit>
+		<Unit filename="C:/Users/guyal/myProjects/RBTree/RBTreeLib/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\RBTreeLib\"/>
 		</Unit>
 	</Project>
 </CodeBlocks_project_file>
