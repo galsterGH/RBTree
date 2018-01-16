@@ -23,12 +23,6 @@ namespace RedBlackTree{
         using Key = const K;
         using TreeKey = std::tuple<Key,const T...>;
 
-        struct RBTreeDeleter{
-            void operator()(RBTree_t *ptr){
-                deleteRBTree(ptr);
-            }
-        };
-
         static
         void*
         alloc(size_t size){
@@ -65,14 +59,15 @@ namespace RedBlackTree{
             delete(static_cast<TreeKey *>(p));
         }
 
-        std::unique_ptr<RBTree_t, RBTreeDeleter>
-                pTreeImpl;
+        std::unique_ptr<
+                RBTree_t,
+                std::function<void(void*)>> pTreeImpl;
     public:
 
         RBTreeImpl():
             pTreeImpl(
                     createRBTreeWithCB(alloc,dealloc,comp,deleteCB),
-                    RBTreeDeleter()){
+                    [](void*p){std::free(p);}){
         }
 
         RBTreeImpl(const RBTreeImpl &other) = delete;
