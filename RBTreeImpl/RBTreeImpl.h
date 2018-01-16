@@ -20,7 +20,6 @@ namespace RedBlackTree{
     class RBTreeImpl{
     private:
 
-
         using Key = const K;
         using TreeKey = std::tuple<Key,const T...>;
 
