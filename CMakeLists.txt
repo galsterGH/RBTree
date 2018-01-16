@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.9)
-project(RBTree C)
+project(RBTree)
 
-set(CMAKE_C_STANDARD 11)
-set(SOURCE_FILES  RBTree.c RBTreeTester.c RBIterator.c)
-add_executable(RBTree ${SOURCE_FILES})
+set(CMAKE_CXX_STANDARD 17)
+add_subdirectory(RBTreeImpl)
+add_subdirectory(RBTreeLib)
