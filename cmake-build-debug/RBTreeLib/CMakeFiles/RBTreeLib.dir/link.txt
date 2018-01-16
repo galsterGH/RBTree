@@ -1,0 +1,2 @@
+C:\MinGW\bin\ar.exe qc libRBTreeLib.a  CMakeFiles/RBTreeLib.dir/__/src/RBIterator.c.obj CMakeFiles/RBTreeLib.dir/__/src/RBTree.c.obj
+C:\MinGW\bin\ranlib.exe libRBTreeLib.a
