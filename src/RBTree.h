@@ -8,7 +8,7 @@ typedef int compRes;
 
 typedef
 struct RBIter{
-    struct RBIter* (*getNext)(struct RBIter*);
+    struct RBIter* (*getNext)(struct RBIter**);
     void* (*get)(struct RBIter*);
 }RBIter_t;
 

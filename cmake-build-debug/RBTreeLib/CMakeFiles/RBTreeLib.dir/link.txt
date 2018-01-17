@@ -1,2 +1,2 @@
-C:\MinGW\bin\ar.exe qc libRBTreeLib.a  CMakeFiles/RBTreeLib.dir/__/src/RBIterator.c.obj CMakeFiles/RBTreeLib.dir/__/src/RBTree.c.obj
-C:\MinGW\bin\ranlib.exe libRBTreeLib.a
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar qc libRBTreeLib.a  CMakeFiles/RBTreeLib.dir/__/src/RBIterator.c.o CMakeFiles/RBTreeLib.dir/__/src/RBTree.c.o
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib libRBTreeLib.a

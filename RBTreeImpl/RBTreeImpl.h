@@ -6,13 +6,14 @@
 #define RBTREEIMPL_RBTREEIMPL_H
 
 extern "C"{
-    #include "..\src\RBTree.h"
+    #include "../src/RBTree.h"
 }
 
 #include <cstdlib>
 #include <memory>
 #include <string>
 #include <tuple>
+#include <functional>
 
 namespace RedBlackTree{
 
@@ -22,6 +23,67 @@ namespace RedBlackTree{
 
         using Key = const K;
         using TreeKey = std::tuple<Key,const T...>;
+        friend class RBIterator;
+
+
+        class RBIterator{
+
+        private:
+
+           RBIter_t *pIterator;
+
+        public:
+
+            RBIterator(const RBTreeImpl &instance):
+                    pIterator(instance.pTreeImpl->getIterator(
+                            instance.pTreeImpl.get())){
+            }
+
+            RBIterator(RBIter_t *ptr):
+                pIterator(ptr){
+
+            }
+
+
+            RBIterator(const RBIterator &other){
+                return operator=(other);
+            }
+
+            RBIterator& operator=(const RBIterator& other){
+                pIterator = other.pIterator;
+                return (*this);
+            }
+
+            RBIterator(RBIterator &&other){
+                 operator=(std::move(other));
+            }
+
+            RBIterator& operator=(RBIterator &&other){
+                pIterator = std::move(other.pIterator);
+                other.pIterator = nullptr;
+                return (*this);
+            }
+
+            TreeKey& operator*(){
+                return *static_cast<TreeKey*>(pIterator->get(pIterator));
+            }
+
+             void operator++(){
+                pIterator = pIterator->getNext(&pIterator);
+            }
+
+            bool operator==(const RBIterator& other){
+                return (pIterator == other.pIterator);
+            }
+
+            bool operator!=(const RBIterator &other){
+                return !operator==(other);
+            }
+
+            ~RBIterator(){
+                std::free(pIterator);
+            }
+        };
 
         static
         void*
@@ -64,6 +126,8 @@ namespace RedBlackTree{
                 std::function<void(void*)>> pTreeImpl;
     public:
 
+        using iterator = RBIterator;
+
         RBTreeImpl():
             pTreeImpl(
                     createRBTreeWithCB(alloc,dealloc,comp,deleteCB),
@@ -92,6 +156,10 @@ namespace RedBlackTree{
                 throw std::string("out of memory");
             }
 
+            if(!pTreeImpl){
+                return false;
+            }
+
             int res =
             pTreeImpl->insert(
                     pTreeImpl.get(),
@@ -106,9 +174,26 @@ namespace RedBlackTree{
             std::tuple<Key> tKey =
                     std::make_tuple(k);
 
+            if(!pTreeImpl){
+                return false;
+            }
+
             return pTreeImpl->del(
                     pTreeImpl.get(),
                     const_cast<std::tuple<Key> *>(&tKey));
+        }
+
+        iterator begin(){
+
+            if(!pTreeImpl){
+                return end();
+            }
+
+            return iterator(*this);
+        }
+
+        iterator end(){
+            return iterator(nullptr);
         }
     };
 };
