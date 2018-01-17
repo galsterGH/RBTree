@@ -67,7 +67,7 @@ namespace RedBlackTree{
         RBTreeImpl():
             pTreeImpl(
                     createRBTreeWithCB(alloc,dealloc,comp,deleteCB),
-                    [](void*p){std::free(p);}){
+                    [](void*p){deleteRBTree(static_cast<RBTree_t*>(p));}){
         }
 
         RBTreeImpl(const RBTreeImpl &other) = delete;
