@@ -55,17 +55,6 @@ CMAKE_BINARY_DIR = C:\Users\guyal\myProjects\RBTree\cmake-build-debug
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	"C:\Program Files\JetBrains\CLion 2017.3.1\bin\cmake\bin\cmake.exe" -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
-
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
-
-.PHONY : rebuild_cache/fast
-
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
@@ -76,6 +65,17 @@ edit_cache:
 edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
+
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	"C:\Program Files\JetBrains\CLion 2017.3.1\bin\cmake\bin\cmake.exe" -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+
+.PHONY : rebuild_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -110,71 +110,30 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named RBTree
+# Target rules for targets named RBTreeImpl
 
 # Build rule for target.
-RBTree: cmake_check_build_system
-	$(MAKE) -f CMakeFiles\Makefile2 RBTree
-.PHONY : RBTree
+RBTreeImpl: cmake_check_build_system
+	$(MAKE) -f CMakeFiles\Makefile2 RBTreeImpl
+.PHONY : RBTreeImpl
 
 # fast build rule for target.
-RBTree/fast:
-	$(MAKE) -f CMakeFiles\RBTree.dir\build.make CMakeFiles/RBTree.dir/build
-.PHONY : RBTree/fast
+RBTreeImpl/fast:
+	$(MAKE) -f RBTreeImpl\CMakeFiles\RBTreeImpl.dir\build.make RBTreeImpl/CMakeFiles/RBTreeImpl.dir/build
+.PHONY : RBTreeImpl/fast
 
-RBTree.obj: RBTree.c.obj
+#=============================================================================
+# Target rules for targets named RBTreeLib
 
-.PHONY : RBTree.obj
+# Build rule for target.
+RBTreeLib: cmake_check_build_system
+	$(MAKE) -f CMakeFiles\Makefile2 RBTreeLib
+.PHONY : RBTreeLib
 
-# target to build an object file
-RBTree.c.obj:
-	$(MAKE) -f CMakeFiles\RBTree.dir\build.make CMakeFiles/RBTree.dir/RBTree.c.obj
-.PHONY : RBTree.c.obj
-
-RBTree.i: RBTree.c.i
-
-.PHONY : RBTree.i
-
-# target to preprocess a source file
-RBTree.c.i:
-	$(MAKE) -f CMakeFiles\RBTree.dir\build.make CMakeFiles/RBTree.dir/RBTree.c.i
-.PHONY : RBTree.c.i
-
-RBTree.s: RBTree.c.s
-
-.PHONY : RBTree.s
-
-# target to generate assembly for a file
-RBTree.c.s:
-	$(MAKE) -f CMakeFiles\RBTree.dir\build.make CMakeFiles/RBTree.dir/RBTree.c.s
-.PHONY : RBTree.c.s
-
-RBTreeTester.obj: RBTreeTester.c.obj
-
-.PHONY : RBTreeTester.obj
-
-# target to build an object file
-RBTreeTester.c.obj:
-	$(MAKE) -f CMakeFiles\RBTree.dir\build.make CMakeFiles/RBTree.dir/RBTreeTester.c.obj
-.PHONY : RBTreeTester.c.obj
-
-RBTreeTester.i: RBTreeTester.c.i
-
-.PHONY : RBTreeTester.i
-
-# target to preprocess a source file
-RBTreeTester.c.i:
-	$(MAKE) -f CMakeFiles\RBTree.dir\build.make CMakeFiles/RBTree.dir/RBTreeTester.c.i
-.PHONY : RBTreeTester.c.i
-
-RBTreeTester.s: RBTreeTester.c.s
-
-.PHONY : RBTreeTester.s
-
-# target to generate assembly for a file
-RBTreeTester.c.s:
-	$(MAKE) -f CMakeFiles\RBTree.dir\build.make CMakeFiles/RBTree.dir/RBTreeTester.c.s
-.PHONY : RBTreeTester.c.s
+# fast build rule for target.
+RBTreeLib/fast:
+	$(MAKE) -f RBTreeLib\CMakeFiles\RBTreeLib.dir\build.make RBTreeLib/CMakeFiles/RBTreeLib.dir/build
+.PHONY : RBTreeLib/fast
 
 # Help Target
 help:
@@ -182,15 +141,10 @@ help:
 	@echo ... all (the default if no target is provided)
 	@echo ... clean
 	@echo ... depend
-	@echo ... rebuild_cache
-	@echo ... RBTree
 	@echo ... edit_cache
-	@echo ... RBTree.obj
-	@echo ... RBTree.i
-	@echo ... RBTree.s
-	@echo ... RBTreeTester.obj
-	@echo ... RBTreeTester.i
-	@echo ... RBTreeTester.s
+	@echo ... rebuild_cache
+	@echo ... RBTreeImpl
+	@echo ... RBTreeLib
 .PHONY : help
 
 

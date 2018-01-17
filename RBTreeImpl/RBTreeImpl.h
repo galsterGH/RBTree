@@ -6,24 +6,22 @@
 #define RBTREEIMPL_RBTREEIMPL_H
 
 extern "C"{
-    #include "RBTree.h"
+    #include "..\src\RBTree.h"
 }
 
 #include <cstdlib>
 #include <memory>
 #include <string>
+#include <tuple>
 
 namespace RedBlackTree{
 
-    template <typename V>
+    template <typename K,typename ... T>
     class RBTreeImpl{
     private:
 
-        struct RBTreeDeleter{
-            void operator()(RBTree_t *ptr){
-                deleteRBTree(ptr);
-            }
-        };
+        using Key = const K;
+        using TreeKey = std::tuple<Key,const T...>;
 
         static
         void*
@@ -40,13 +38,15 @@ namespace RedBlackTree{
         static
         int
         comp(void *p1, void *p2){
-            auto v1 = static_cast<V*>(p1);
-            auto v2 = static_cast<V*>(p2);
+            auto v1 = static_cast<TreeKey*>(p1);
+            auto v2 = static_cast<TreeKey*>(p2);
+            auto k1 = std::get<0>(*v1);
+            auto k2 = std::get<0>(*v2);
 
-            if(*v1 < *v2){
+            if(k1 < k2){
                 return -1;
             }
-            else if(*v1 == *v2){
+            else if(k1 == k2){
                 return 0;
             }
 
@@ -56,17 +56,18 @@ namespace RedBlackTree{
         static
         void
         deleteCB(void *p){
-            delete(static_cast<V*>(p));
+            delete(static_cast<TreeKey *>(p));
         }
 
-        std::unique_ptr<RBTree_t, RBTreeDeleter>
-                pTreeImpl;
+        std::unique_ptr<
+                RBTree_t,
+                std::function<void(void*)>> pTreeImpl;
     public:
 
         RBTreeImpl():
             pTreeImpl(
                     createRBTreeWithCB(alloc,dealloc,comp,deleteCB),
-                    RBTreeDeleter()){
+                    [](void*p){deleteRBTree(static_cast<RBTree_t*>(p));}){
         }
 
         RBTreeImpl(const RBTreeImpl &other) = delete;
@@ -83,26 +84,31 @@ namespace RedBlackTree{
         }
 
         bool
-        insert(const V& val){
-            V *newV = new V(val);
+        insert(Key& key, const T&... vals){
+            TreeKey *compoundKey =
+                    new TreeKey(std::make_tuple(key,vals...));
 
-            if(!newV){
+            if(!compoundKey){
                 throw std::string("out of memory");
             }
 
             int res =
             pTreeImpl->insert(
                     pTreeImpl.get(),
-                    static_cast<void*>(newV));
+                    static_cast<void*>(compoundKey));
 
             return (res);
         }
 
         bool
-        del(const V& val){
+        del(Key& k){
+
+            std::tuple<Key> tKey =
+                    std::make_tuple(k);
+
             return pTreeImpl->del(
                     pTreeImpl.get(),
-                    const_cast<V*>(&val));
+                    const_cast<std::tuple<Key> *>(&tKey));
         }
     };
 };
