@@ -8,90 +8,90 @@
 		<Option virtualFolders="CMake Files\;CMake Files\RBTreeImpl\;CMake Files\RBTreeLib\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="C:/Users/guyal/myProjects/RBTree/cmake-build-debug/RBTreeLib"/>
+				<Option working_dir="/Users/galster/myProjects/RBTree/cmake-build-debug/RBTreeLib"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/RBTreeLib/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/RBTreeLib/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/RBTreeLib/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/RBTreeLib/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/galster/myProjects/RBTree/cmake-build-debug/RBTreeLib/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/galster/myProjects/RBTree/cmake-build-debug/RBTreeLib/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/galster/myProjects/RBTree/cmake-build-debug/RBTreeLib/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/galster/myProjects/RBTree/cmake-build-debug/RBTreeLib/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="RBTreeLib">
-				<Option output="C:/Users/guyal/myProjects/RBTree/cmake-build-debug/RBTreeLib/libRBTreeLib.a" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="C:/Users/guyal/myProjects/RBTree/cmake-build-debug/RBTreeLib"/>
+				<Option output="/Users/galster/myProjects/RBTree/cmake-build-debug/RBTreeLib/libRBTreeLib.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/galster/myProjects/RBTree/cmake-build-debug/RBTreeLib"/>
 				<Option object_output="./"/>
 				<Option type="2"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="C:/Users/guyal/myProjects/RBTree/RBTreeLib"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/include/c++"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/include/c++/mingw32"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/include/c++/backward"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/include"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/../../../../include"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/include-fixed"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/../../../../mingw32/include"/>
+					<Add directory="/Users/galster/myProjects/RBTree/RBTreeLib"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/RBTreeLib/Makefile&quot;  VERBOSE=1 RBTreeLib"/>
-					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/RBTreeLib/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/RBTreeLib/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/RBTreeLib/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/galster/myProjects/RBTree/cmake-build-debug/RBTreeLib/Makefile&quot;  VERBOSE=1 RBTreeLib"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/galster/myProjects/RBTree/cmake-build-debug/RBTreeLib/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/galster/myProjects/RBTree/cmake-build-debug/RBTreeLib/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/galster/myProjects/RBTree/cmake-build-debug/RBTreeLib/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="RBTreeLib/fast">
-				<Option output="C:/Users/guyal/myProjects/RBTree/cmake-build-debug/RBTreeLib/libRBTreeLib.a" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="C:/Users/guyal/myProjects/RBTree/cmake-build-debug/RBTreeLib"/>
+				<Option output="/Users/galster/myProjects/RBTree/cmake-build-debug/RBTreeLib/libRBTreeLib.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/galster/myProjects/RBTree/cmake-build-debug/RBTreeLib"/>
 				<Option object_output="./"/>
 				<Option type="2"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="C:/Users/guyal/myProjects/RBTree/RBTreeLib"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/include/c++"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/include/c++/mingw32"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/include/c++/backward"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/include"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/../../../../include"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/include-fixed"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/4.8.1/../../../../mingw32/include"/>
+					<Add directory="/Users/galster/myProjects/RBTree/RBTreeLib"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/RBTreeLib/Makefile&quot;  VERBOSE=1 RBTreeLib/fast"/>
-					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/RBTreeLib/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/RBTreeLib/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/guyal/myProjects/RBTree/cmake-build-debug/RBTreeLib/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/galster/myProjects/RBTree/cmake-build-debug/RBTreeLib/Makefile&quot;  VERBOSE=1 RBTreeLib/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/galster/myProjects/RBTree/cmake-build-debug/RBTreeLib/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/galster/myProjects/RBTree/cmake-build-debug/RBTreeLib/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/galster/myProjects/RBTree/cmake-build-debug/RBTreeLib/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="C:/Users/guyal/myProjects/RBTree/src/RBIterator.c">
+		<Unit filename="/Users/galster/myProjects/RBTree/src/RBIterator.c">
 			<Option target="RBTreeLib"/>
 		</Unit>
-		<Unit filename="C:/Users/guyal/myProjects/RBTree/src/RBIterator.h">
+		<Unit filename="/Users/galster/myProjects/RBTree/src/RBIterator.h">
 			<Option target="RBTreeLib"/>
 		</Unit>
-		<Unit filename="C:/Users/guyal/myProjects/RBTree/src/RBTree.c">
+		<Unit filename="/Users/galster/myProjects/RBTree/src/RBTree.c">
 			<Option target="RBTreeLib"/>
 		</Unit>
-		<Unit filename="C:/Users/guyal/myProjects/RBTree/src/RBTree.h">
+		<Unit filename="/Users/galster/myProjects/RBTree/src/RBTree.h">
 			<Option target="RBTreeLib"/>
 		</Unit>
-		<Unit filename="C:/Users/guyal/myProjects/RBTree/src/RBTreeImpl.h">
+		<Unit filename="/Users/galster/myProjects/RBTree/src/RBTreeImpl.h">
 			<Option target="RBTreeLib"/>
 		</Unit>
-		<Unit filename="C:/Users/guyal/myProjects/RBTree/CMakeLists.txt">
+		<Unit filename="/Users/galster/myProjects/RBTree/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
-		<Unit filename="C:/Users/guyal/myProjects/RBTree/RBTreeImpl/CMakeLists.txt">
+		<Unit filename="/Users/galster/myProjects/RBTree/RBTreeImpl/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\RBTreeImpl\"/>
 		</Unit>
-		<Unit filename="C:/Users/guyal/myProjects/RBTree/RBTreeImpl/CMakeLists.txt">
+		<Unit filename="/Users/galster/myProjects/RBTree/RBTreeImpl/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\RBTreeImpl\"/>
 		</Unit>
-		<Unit filename="C:/Users/guyal/myProjects/RBTree/RBTreeLib/CMakeLists.txt">
+		<Unit filename="/Users/galster/myProjects/RBTree/RBTreeLib/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\RBTreeLib\"/>
 		</Unit>
-		<Unit filename="C:/Users/guyal/myProjects/RBTree/RBTreeLib/CMakeLists.txt">
+		<Unit filename="/Users/galster/myProjects/RBTree/RBTreeLib/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\RBTreeLib\"/>
 		</Unit>
 	</Project>

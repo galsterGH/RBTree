@@ -179,7 +179,7 @@
 
         for(iter = t->getIterator(t);
             iter != NULL;
-            iter = iter->getNext(iter)){
+            iter = iter->getNext(&iter)){
 
             int *curr = (int*)(iter->get(iter));
 

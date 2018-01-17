@@ -14,10 +14,10 @@ get(RBIter_t *i){
 
 static
 RBIter_t*
-getNext(RBIter_t *i){
+getNext(RBIter_t **i){
 
     Node *curr = NULL,*prev = NULL;
-    RBIterImpl_t *iter = TO_ITER(i), *newIter = NULL;
+    RBIterImpl_t *iter = TO_ITER(*i), *newIter = NULL;
     Allocator allc;
     Deallocator dllc;
 
@@ -28,7 +28,8 @@ getNext(RBIter_t *i){
 
     // first free the memory of i so that we
     // don't leak it
-    dllc(i);
+    dllc(iter);
+    *i = NULL;
 
     if(curr->right) {
         curr = curr->right;

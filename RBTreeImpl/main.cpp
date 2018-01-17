@@ -1,5 +1,6 @@
 
 #include "RBTreeImpl.h"
+#include <iostream>
 
 int main() {
     RedBlackTree::RBTreeImpl<int,std::string> tree;
@@ -9,8 +10,10 @@ int main() {
     tree.insert(120,"wild");
     tree.insert(40,"abc");
     tree.insert(32,"efg");
-    tree.del(10);
-    tree.del(32);
-    tree.del(40);
+
+    for(auto i = tree.begin(); i != tree.end(); ++i){
+        std::cout << std::get<0>(*i) << " " << std::get<1>(*i) << std::endl;
+    }
+
     return 0;
 }

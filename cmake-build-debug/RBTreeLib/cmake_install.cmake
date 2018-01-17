@@ -1,8 +1,8 @@
-# Install script for directory: C:/Users/guyal/myProjects/RBTree/RBTreeLib
+# Install script for directory: /Users/galster/myProjects/RBTree/RBTreeLib
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/RBTree")
+  set(CMAKE_INSTALL_PREFIX "/usr/local")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
