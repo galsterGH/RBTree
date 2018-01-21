@@ -11,8 +11,8 @@ struct P{
 
 int main(){
     RedBlackTree::RBTreeImpl<P> tree([](const P& p1, const P& p2)->int{
-       return p1.i < p2.i || (p1.i == p2.i && p1.j < p2.j) ? -1 :
-              (p1.i == p2.i && p1.j == p2.j ? 0 : 1);
+       return p1.i < p2.i || (p1.i == p2.i && p1.j < p2.j) ? 1 :
+              (p1.i == p2.i && p1.j == p2.j ? 0 : -1);
     });
 
     tree.insert({1,2});

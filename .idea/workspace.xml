@@ -14,16 +14,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c2f928ac-dc20-4c9c-b3c9-b8d6b1d42b28" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/RBTreeImpl/RBTreeImpl.h" afterPath="$PROJECT_DIR$/RBTreeImpl/RBTreeImpl.h" />
       <change beforePath="$PROJECT_DIR$/RBTreeImpl/main.cpp" afterPath="$PROJECT_DIR$/RBTreeImpl/main.cpp" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" />
-      <change beforePath="$PROJECT_DIR$/src/RBIterator.c" afterPath="$PROJECT_DIR$/src/RBIterator.c" />
-      <change beforePath="$PROJECT_DIR$/src/RBIterator.h" afterPath="$PROJECT_DIR$/src/RBIterator.h" />
-      <change beforePath="$PROJECT_DIR$/src/RBTree.c" afterPath="$PROJECT_DIR$/src/RBTree.c" />
-      <change beforePath="$PROJECT_DIR$/src/RBTree.h" afterPath="$PROJECT_DIR$/src/RBTree.h" />
-      <change beforePath="$PROJECT_DIR$/src/RBTreeImpl.h" afterPath="$PROJECT_DIR$/src/RBTreeImpl.h" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -36,11 +28,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="main.cpp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RBTreeImpl/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="608">
-              <caret line="35" column="20" lean-forward="false" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="20" />
+            <state relative-caret-position="380">
+              <caret line="19" column="23" lean-forward="true" selection-start-line="19" selection-start-column="23" selection-end-line="19" selection-end-column="23" />
               <folding>
                 <element signature="e#1#24#0" expanded="true" />
               </folding>
@@ -48,15 +40,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RBTreeImpl.h" pinned="false" current-in-tab="false">
+      <file leaf-file-name="RBTreeImpl.h" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/RBTreeImpl/RBTreeImpl.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="214">
-              <caret line="130" column="44" lean-forward="false" selection-start-line="130" selection-start-column="44" selection-end-line="130" selection-end-column="44" />
+            <state relative-caret-position="-871">
+              <caret line="138" column="10" lean-forward="true" selection-start-line="138" selection-start-column="10" selection-end-line="138" selection-end-column="10" />
               <folding>
                 <element signature="e#152#170#0" expanded="true" />
-                <element signature="e#286#298#0" expanded="true" />
-                <element signature="e#395#407#0" expanded="true" />
+                <element signature="e#285#297#0" expanded="true" />
+                <element signature="e#394#406#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -96,7 +88,7 @@
         <entry file="file://$PROJECT_DIR$/src/RBIterator.h">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="300">
-              <caret line="20" column="40" lean-forward="true" selection-start-line="20" selection-start-column="40" selection-end-line="20" selection-end-column="40" />
+              <caret line="20" column="40" lean-forward="false" selection-start-line="20" selection-start-column="40" selection-end-line="20" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -116,7 +108,7 @@
         <entry file="file://$PROJECT_DIR$/src/RBTree.h">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="637">
-              <caret line="57" column="26" lean-forward="true" selection-start-line="57" selection-start-column="26" selection-end-line="57" selection-end-column="26" />
+              <caret line="57" column="26" lean-forward="false" selection-start-line="57" selection-start-column="26" selection-end-line="57" selection-end-column="26" />
               <folding>
                 <element signature="e#1230#1248#0" expanded="true" />
               </folding>
@@ -192,8 +184,8 @@
         <option value="$PROJECT_DIR$/src/RBTree.h" />
         <option value="$PROJECT_DIR$/src/RBTreeImpl.h" />
         <option value="$PROJECT_DIR$/src/RBTree.c" />
-        <option value="$PROJECT_DIR$/RBTreeImpl/RBTreeImpl.h" />
         <option value="$PROJECT_DIR$/RBTreeImpl/main.cpp" />
+        <option value="$PROJECT_DIR$/RBTreeImpl/RBTreeImpl.h" />
       </list>
     </option>
   </component>
@@ -323,12 +315,12 @@
       <workItem from="1515809603109" duration="6461000" />
       <workItem from="1515992192946" duration="4750000" />
       <workItem from="1516159272860" duration="6121000" />
-      <workItem from="1516477696818" duration="8803000" />
+      <workItem from="1516477696818" duration="10346000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="59995000" />
+    <option name="totallyTimeSpent" value="61538000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="1027" extended-state="6" />
@@ -336,11 +328,11 @@
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24166666" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3329843" sideWeight="0.5" order="18" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3329843" sideWeight="0.5" order="18" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29812607" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="15" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.43769634" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43769634" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="17" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -580,7 +572,7 @@
     <entry file="file://$PROJECT_DIR$/src/RBIterator.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
-          <caret line="20" column="40" lean-forward="true" selection-start-line="20" selection-start-column="40" selection-end-line="20" selection-end-column="40" />
+          <caret line="20" column="40" lean-forward="false" selection-start-line="20" selection-start-column="40" selection-end-line="20" selection-end-column="40" />
           <folding />
         </state>
       </provider>
@@ -612,7 +604,7 @@
     <entry file="file://$PROJECT_DIR$/src/RBTree.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="637">
-          <caret line="57" column="26" lean-forward="true" selection-start-line="57" selection-start-column="26" selection-end-line="57" selection-end-column="26" />
+          <caret line="57" column="26" lean-forward="false" selection-start-line="57" selection-start-column="26" selection-end-line="57" selection-end-column="26" />
           <folding>
             <element signature="e#1230#1248#0" expanded="true" />
           </folding>
@@ -638,24 +630,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RBTreeImpl/RBTreeImpl.h">
+    <entry file="file://$PROJECT_DIR$/RBTreeImpl/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="130" column="44" lean-forward="false" selection-start-line="130" selection-start-column="44" selection-end-line="130" selection-end-column="44" />
+        <state relative-caret-position="380">
+          <caret line="19" column="23" lean-forward="true" selection-start-line="19" selection-start-column="23" selection-end-line="19" selection-end-column="23" />
           <folding>
-            <element signature="e#152#170#0" expanded="true" />
-            <element signature="e#286#298#0" expanded="true" />
-            <element signature="e#395#407#0" expanded="true" />
+            <element signature="e#1#24#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RBTreeImpl/main.cpp">
+    <entry file="file://$PROJECT_DIR$/RBTreeImpl/RBTreeImpl.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="608">
-          <caret line="35" column="20" lean-forward="false" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="20" />
+        <state relative-caret-position="-871">
+          <caret line="138" column="10" lean-forward="true" selection-start-line="138" selection-start-column="10" selection-end-line="138" selection-end-column="10" />
           <folding>
-            <element signature="e#1#24#0" expanded="true" />
+            <element signature="e#152#170#0" expanded="true" />
+            <element signature="e#285#297#0" expanded="true" />
+            <element signature="e#394#406#0" expanded="true" />
           </folding>
         </state>
       </provider>

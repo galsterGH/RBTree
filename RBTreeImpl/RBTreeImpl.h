@@ -17,7 +17,6 @@ extern "C"{
 
 namespace RedBlackTree{
 
-
     template <typename K>
     struct RBCompInt{
         virtual int compare(const K&, const K&) = 0;
@@ -29,11 +28,21 @@ namespace RedBlackTree{
 
     private:
 
+        //
+        // aliases which will be used by this class
+        // TreeKey - will be the key stored within each node
+        //   it is composed of a pointer to a RBCompInt interface (for comparison)
+        //   as well as the key passed by the user
+        //
         using CompInt = RBCompInt<K>;
         using TreeKey = std::pair<RBCompInt<K>*,K>;
         using TreeComparator = std::function<int(const K&,const K&)>;
         friend class RBIterator;
 
+        //
+        // A wrapper iterator class
+        // around the RBIter_t structure from RBTree Lib
+        //
         class RBIterator{
 
         private:
@@ -42,6 +51,12 @@ namespace RedBlackTree{
 
         public:
 
+            //
+            // This constructor initializes the iterator by calling the
+            // corresponding getIterator api from RBTree Lib
+            // This iterator class supports all expected operators of an iterator
+            // e.g. operator*, operator->, operator++
+            //
             RBIterator(const RBTreeImpl &instance):
                     pIterator(instance.pTreeImpl->getIterator(
                             instance.pTreeImpl.get(),NULL)){
@@ -79,7 +94,8 @@ namespace RedBlackTree{
             }
 
             K* operator->(){
-                return &static_cast<TreeKey*>(pIterator->get(pIterator))->second;
+                return &static_cast<TreeKey*>(
+                        pIterator->get(pIterator))->second;
             }
 
             RBIterator operator++(){
@@ -100,6 +116,11 @@ namespace RedBlackTree{
             }
         };
 
+        //
+        // the static member functions below will be
+        // passed to the RBTree Lib
+        //
+
         static
         void*
         alloc(size_t size){
@@ -112,18 +133,26 @@ namespace RedBlackTree{
             return std::free(p);
         }
 
+        //
+        // This will be called for every operation in the RBTree
+        // we'll delegate this to the comparator passed in by the user
+        //
         static
         int
         comp(void *p1, void *p2){
 
-            auto k1 = static_cast<TreeKey*>(p1)->second;
-            auto k2 = static_cast<TreeKey*>(p2)->second;
+            auto k1 = reinterpret_cast<TreeKey*>(p1)->second;
+            auto k2 = reinterpret_cast<TreeKey*>(p2)->second;
 
-            return static_cast<TreeKey*>(p1)
+            return reinterpret_cast<TreeKey*>(p1)
                     ->first
                     ->compare(k1,k2);
         }
 
+        //
+        // This will be called when a node is begin deleted
+        // and the key of its inorder needs to be copied into it
+        //
         static
         void
         copy(void **to, void **from){
@@ -135,10 +164,15 @@ namespace RedBlackTree{
             *kt2 = NULL;
         }
 
+        //
+        // This will be called everytime a Node is deleted
+        // we'll use this notification to destroy the corresponding
+        // TreeKey held within that node
+        //
         static
         void
         deleteCB(void *p){
-            delete(static_cast<TreeKey *>(p));
+            delete(reinterpret_cast<TreeKey *>(p));
         }
 
         virtual
@@ -146,30 +180,46 @@ namespace RedBlackTree{
             return comparator(first,second);
         }
 
+        //
+        // Member variables
+        //
+
+        //
+        // A unique_ptr wrapping around the RBTree_t structure
+        // it will use a special deleter that will call the RBTree
+        // deallocation function, when it needs to be destructed
+        //
         std::unique_ptr<
                 RBTree_t,
                 std::function<void(void*)>> pTreeImpl;
 
+        //This will be used to compare the keys in the tree
         TreeComparator comparator;
-
 
     public:
 
         using iterator = RBIterator;
         using Comparator = TreeComparator;
 
+        // Default constructor initializes a default comparator
         RBTreeImpl():
             RBTreeImpl([](const K& first, const K& second)->int{
                 return first < second ? -1 : (first == second ? 0 : 1);
             }){}
 
 
+        //
+        // main constructor initializes the unique_ptr by calling the CreateRBTreeWithCb method
+        // in the RBTree Lib and passes to it all the functions above
+        // it also creates the deleter function that calls deleteRbTree from the RBTree Lib.
+        //
         RBTreeImpl(const Comparator& compt):
                 pTreeImpl(
                         createRBTreeWithCB(alloc,dealloc,comp,copy,deleteCB),
                         [](void*p){deleteRBTree(static_cast<RBTree_t*>(p));}),
                 comparator(compt){}
 
+        //currently we don't allow copying a tree
         RBTreeImpl(const RBTreeImpl &other) = delete;
         const RBTreeImpl& operator=(const RBTreeImpl &other) = delete;
 
