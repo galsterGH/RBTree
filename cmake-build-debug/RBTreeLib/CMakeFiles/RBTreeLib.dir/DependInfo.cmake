@@ -4,10 +4,10 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/Users/galster/myProjects/RBTree/src/RBIterator.c" "/Users/galster/myProjects/RBTree/cmake-build-debug/RBTreeLib/CMakeFiles/RBTreeLib.dir/__/src/RBIterator.c.o"
-  "/Users/galster/myProjects/RBTree/src/RBTree.c" "/Users/galster/myProjects/RBTree/cmake-build-debug/RBTreeLib/CMakeFiles/RBTreeLib.dir/__/src/RBTree.c.o"
+  "C:/Users/guyal/myProjects/RBTree/src/RBIterator.c" "C:/Users/guyal/myProjects/RBTree/cmake-build-debug/RBTreeLib/CMakeFiles/RBTreeLib.dir/__/src/RBIterator.c.obj"
+  "C:/Users/guyal/myProjects/RBTree/src/RBTree.c" "C:/Users/guyal/myProjects/RBTree/cmake-build-debug/RBTreeLib/CMakeFiles/RBTreeLib.dir/__/src/RBTree.c.obj"
   )
-set(CMAKE_C_COMPILER_ID "AppleClang")
+set(CMAKE_C_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_C_TARGET_INCLUDE_PATH

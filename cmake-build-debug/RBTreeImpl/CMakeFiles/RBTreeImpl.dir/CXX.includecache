@@ -6,9 +6,9 @@
 
 #IncludeRegexTransform: 
 
-/Users/galster/myProjects/RBTree/RBTreeImpl/RBTreeImpl.h
+C:/Users/guyal/myProjects/RBTree/RBTreeImpl/RBTreeImpl.h
 ../src/RBTree.h
-/Users/galster/myProjects/RBTree/src/RBTree.h
+C:/Users/guyal/myProjects/RBTree/src/RBTree.h
 cstdlib
 -
 memory
@@ -20,13 +20,13 @@ tuple
 functional
 -
 
-/Users/galster/myProjects/RBTree/RBTreeImpl/main.cpp
+C:/Users/guyal/myProjects/RBTree/RBTreeImpl/main.cpp
 RBTreeImpl.h
-/Users/galster/myProjects/RBTree/RBTreeImpl/RBTreeImpl.h
+C:/Users/guyal/myProjects/RBTree/RBTreeImpl/RBTreeImpl.h
 iostream
 -
 
-/Users/galster/myProjects/RBTree/src/RBTree.h
+C:/Users/guyal/myProjects/RBTree/src/RBTree.h
 stddef.h
 -
 

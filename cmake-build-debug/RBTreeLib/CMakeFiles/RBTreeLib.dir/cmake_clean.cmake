@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/RBTreeLib.dir/__/src/RBIterator.c.o"
-  "CMakeFiles/RBTreeLib.dir/__/src/RBTree.c.o"
+  "CMakeFiles/RBTreeLib.dir/__/src/RBIterator.c.obj"
+  "CMakeFiles/RBTreeLib.dir/__/src/RBTree.c.obj"
   "libRBTreeLib.pdb"
   "libRBTreeLib.a"
 )

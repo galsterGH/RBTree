@@ -26,7 +26,6 @@ struct RBTree{
     RBIter_t* (*getIterator)(struct RBTree*, RBIter_t *);
 }RBTree_t;
 
-
 typedef void* (*Allocator)(size_t sizeToAllocate);
 typedef void (*Deallocator)(void*);
 typedef void (*OnDeleteCB)(void *);

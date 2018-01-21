@@ -1,7 +1,9 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/RBTreeImpl.dir/main.cpp.o"
+  "CMakeFiles/RBTreeImpl.dir/main.cpp.obj"
   "RBTreeImpl.pdb"
-  "RBTreeImpl"
+  "RBTreeImpl.exe"
+  "RBTreeImpl.exe.manifest"
+  "libRBTreeImpl.dll.a"
 )
 
 # Per-language clean rules from dependency scanning.

@@ -6,25 +6,25 @@
 
 #IncludeRegexTransform: 
 
-/Users/galster/myProjects/RBTree/src/RBIterator.c
+C:/Users/guyal/myProjects/RBTree/src/RBIterator.c
 RBIterator.h
-/Users/galster/myProjects/RBTree/src/RBIterator.h
+C:/Users/guyal/myProjects/RBTree/src/RBIterator.h
 
-/Users/galster/myProjects/RBTree/src/RBIterator.h
+C:/Users/guyal/myProjects/RBTree/src/RBIterator.h
 RBTreeImpl.h
-/Users/galster/myProjects/RBTree/src/RBTreeImpl.h
+C:/Users/guyal/myProjects/RBTree/src/RBTreeImpl.h
 
-/Users/galster/myProjects/RBTree/src/RBTree.c
+C:/Users/guyal/myProjects/RBTree/src/RBTree.c
 RBTreeImpl.h
-/Users/galster/myProjects/RBTree/src/RBTreeImpl.h
+C:/Users/guyal/myProjects/RBTree/src/RBTreeImpl.h
 RBIterator.h
-/Users/galster/myProjects/RBTree/src/RBIterator.h
+C:/Users/guyal/myProjects/RBTree/src/RBIterator.h
 
-/Users/galster/myProjects/RBTree/src/RBTree.h
+C:/Users/guyal/myProjects/RBTree/src/RBTree.h
 stddef.h
 -
 
-/Users/galster/myProjects/RBTree/src/RBTreeImpl.h
+C:/Users/guyal/myProjects/RBTree/src/RBTreeImpl.h
 stdio.h
 -
 stdlib.h
@@ -34,5 +34,5 @@ assert.h
 string.h
 -
 RBTree.h
-/Users/galster/myProjects/RBTree/src/RBTree.h
+C:/Users/guyal/myProjects/RBTree/src/RBTree.h
 

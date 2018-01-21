@@ -4,9 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/Users/galster/myProjects/RBTree/RBTreeImpl/main.cpp" "/Users/galster/myProjects/RBTree/cmake-build-debug/RBTreeImpl/CMakeFiles/RBTreeImpl.dir/main.cpp.o"
+  "C:/Users/guyal/myProjects/RBTree/RBTreeImpl/main.cpp" "C:/Users/guyal/myProjects/RBTree/cmake-build-debug/RBTreeImpl/CMakeFiles/RBTreeImpl.dir/main.cpp.obj"
   )
-set(CMAKE_CXX_COMPILER_ID "AppleClang")
+set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
@@ -15,7 +15,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/Users/galster/myProjects/RBTree/cmake-build-debug/RBTreeLib/CMakeFiles/RBTreeLib.dir/DependInfo.cmake"
+  "C:/Users/guyal/myProjects/RBTree/cmake-build-debug/RBTreeLib/CMakeFiles/RBTreeLib.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

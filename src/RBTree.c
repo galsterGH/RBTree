@@ -212,7 +212,6 @@
       return curr;
     }
 
-
     static
     void
     adjustDeleteByDir(Node **nodeToFix, Dir dir){
@@ -303,7 +302,6 @@
         // if nodeToFix is either the root or red
         COLOR_BLACK(nodeToFix);
     }
-
 
     static
     BOOL
@@ -480,7 +478,6 @@
     }
 
     #ifdef _DEBUG_RBTREE_
-
     static
     void
     showRecursively(RBTree_t *t, Node *n){
