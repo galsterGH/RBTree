@@ -53,6 +53,7 @@ struct RBTreeImpl{
     Allocator alloc;
     Deallocator dealloc;
     Comparator comparator;
+    Copy copy;
 #ifdef _DEBUG_RBTREE_
     shower show;
 #endif

@@ -10,6 +10,7 @@ typedef
 struct RBIter{
     struct RBIter* (*getNext)(struct RBIter**);
     void* (*get)(struct RBIter*);
+    struct RBIter *(*clone) (struct RBIter*);
 }RBIter_t;
 
 typedef
@@ -22,7 +23,7 @@ struct RBTree{
     BOOL (*showTree)(struct RBTree*);
 #endif
 
-    RBIter_t* (*getIterator)(struct RBTree*);
+    RBIter_t* (*getIterator)(struct RBTree*, RBIter_t *);
 }RBTree_t;
 
 
@@ -30,6 +31,7 @@ typedef void* (*Allocator)(size_t sizeToAllocate);
 typedef void (*Deallocator)(void*);
 typedef void (*OnDeleteCB)(void *);
 typedef int (*Comparator)(void*, void*);
+typedef void (*Copy)(void **,void**);
 
 #ifdef _DEBUG_RBTREE_
 typedef void (*shower)(void*);
@@ -39,7 +41,8 @@ RBTree_t *
 createRBTree(
     const Allocator alloc,
     const Deallocator dealloc,
-    const Comparator comparator
+    const Comparator comparator,
+    const Copy copy
 #ifdef _DEBUG_RBTREE_
     ,const shower show
 #endif
@@ -50,6 +53,7 @@ createRBTreeWithCB(
         const Allocator alloc,
         const Deallocator dealloc,
         const Comparator comparator,
+        const Copy copy,
 #ifdef _DEBUG_RBTREE_
         const shower show,
 #endif
