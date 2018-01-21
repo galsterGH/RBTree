@@ -2,6 +2,38 @@
 
 #define TO_ITER(i) ((RBIterImpl_t*)(i))
 
+static RBIter_t *clone(RBIter_t*);
+static void* get(RBIter_t *i);
+static RBIter_t* getNext(RBIter_t **i);
+
+static
+RBIter_t*
+clone(RBIter_t *from){
+
+    RBIterImpl_t *iter = TO_ITER(from),
+            *ret = NULL;
+
+    if(!from){
+        return NULL;
+    }
+
+    ALLOC(
+            RBIterImpl_t,
+            ret,
+            iter->alloc,
+            sizeof(RBIterImpl_t),
+            NULL);
+
+
+    ret->currNode = iter->currNode;
+    ret->alloc = iter->alloc;
+    ret->dalloc = iter->dalloc;
+    (ret->api).getNext = &getNext;
+    (ret->api).get = &get;
+    (ret->api).clone = &clone;
+    return &(ret->api);
+}
+
 static
 void*
 get(RBIter_t *i){
@@ -70,8 +102,10 @@ getNext(RBIter_t **i){
     newIter->dalloc = dllc;
     (newIter->api).getNext = &getNext;
     (newIter->api).get = &get;
+    (newIter->api).clone = &clone;
     return &(newIter->api);
 }
+
 
 RBIter_t*
 getIteratorFromNode(
@@ -101,6 +135,13 @@ getIteratorFromNode(
     iter->dalloc = dlloc;
     (iter->api).getNext = &getNext;
     (iter->api).get = &get;
+    (iter->api).clone = &clone;
     return &(iter->api);
+}
+
+Node*
+getNodeFromIter(RBIter_t* iter){
+    assert(iter);
+    return TO_ITER(iter)->currNode;
 }
 

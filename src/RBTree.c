@@ -385,7 +385,9 @@
         // we wanted to delete has the key of the inOrder node which we'll be deleting
         //
 
-        deleteLoc->key = inOrder->key;
+        if(deleteLoc!= inOrder) {
+            treeImpl->copy(&(deleteLoc->key),&(inOrder->key));
+        }
 
         if(GET_COLOR(inOrder) == BLACK){
 
@@ -539,7 +541,9 @@
 
     static
     RBIter_t*
-    getIterator(RBTree_t *tree){
+    getIterator(
+            RBTree_t *tree,
+            RBIter_t* curr){
 
         Node *root = NULL;
 
@@ -547,8 +551,15 @@
             return NULL;
         }
 
+        Node *toStartFrom = root;
+
+        if(curr) {
+            toStartFrom =
+                    getNodeFromIter(curr);
+        }
+
         return getIteratorFromNode(
-                root,
+                toStartFrom,
                 TO_TREE(tree)->alloc,
                 TO_TREE(tree)->dealloc);
     }
@@ -577,7 +588,8 @@
     createRBTree(
         const Allocator alloc,
         const Deallocator dealloc,
-        const Comparator comparator
+        const Comparator comparator,
+        const Copy copy
     #ifdef _DEBUG_RBTREE_
         ,const shower show
     #endif
@@ -589,6 +601,7 @@
       tree->alloc = alloc;
       tree->dealloc = dealloc;
       tree->comparator = comparator;
+      tree->copy = copy;
       tree->api.insert = &insert;
       tree->api.del = &del;
       tree->api.find = &find;
@@ -607,6 +620,7 @@
             const Allocator alloc,
             const Deallocator dealloc,
             const Comparator comparator,
+            const Copy copy,
 #ifdef _DEBUG_RBTREE_
             const shower show,
 #endif
@@ -616,7 +630,8 @@
                 (Tree*)createRBTree(
                         alloc,
                         dealloc,
-                        comparator
+                        comparator,
+                        copy
 #ifdef _DEBUG_RBTREE_
         ,show
 #endif

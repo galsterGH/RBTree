@@ -17,27 +17,13 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/RBTreeImpl/RBTreeImpl.h" afterPath="$PROJECT_DIR$/RBTreeImpl/RBTreeImpl.h" />
       <change beforePath="$PROJECT_DIR$/RBTreeImpl/main.cpp" afterPath="$PROJECT_DIR$/RBTreeImpl/main.cpp" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.9.6/CMakeRCCompiler.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RBTree.dir/C.includecache" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RBTree.dir/DependInfo.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RBTree.dir/build.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RBTree.dir/cmake_clean.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RBTree.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RBTree.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RBTree.dir/flags.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RBTree.dir/link.txt" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RBTree.dir/linklibs.rsp" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RBTree.dir/objects1.rsp" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RBTree.dir/progress.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RBTreeImpl.dir/DependInfo.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RBTreeImpl.dir/build.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RBTreeImpl.dir/cmake_clean.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RBTreeImpl.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RBTreeImpl.dir/flags.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/RBTreeImpl.dir/progress.make" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" />
       <change beforePath="$PROJECT_DIR$/src/RBIterator.c" afterPath="$PROJECT_DIR$/src/RBIterator.c" />
+      <change beforePath="$PROJECT_DIR$/src/RBIterator.h" afterPath="$PROJECT_DIR$/src/RBIterator.h" />
+      <change beforePath="$PROJECT_DIR$/src/RBTree.c" afterPath="$PROJECT_DIR$/src/RBTree.c" />
       <change beforePath="$PROJECT_DIR$/src/RBTree.h" afterPath="$PROJECT_DIR$/src/RBTree.h" />
-      <change beforePath="$PROJECT_DIR$/src/RBTreeTester.c" afterPath="$PROJECT_DIR$/src/RBTreeTester.c" />
+      <change beforePath="$PROJECT_DIR$/src/RBTreeImpl.h" afterPath="$PROJECT_DIR$/src/RBTreeImpl.h" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -53,8 +39,8 @@
       <file leaf-file-name="main.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/RBTreeImpl/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" column="1" lean-forward="true" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
+            <state relative-caret-position="608">
+              <caret line="35" column="20" lean-forward="false" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="20" />
               <folding>
                 <element signature="e#1#24#0" expanded="true" />
               </folding>
@@ -65,12 +51,33 @@
       <file leaf-file-name="RBTreeImpl.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RBTreeImpl/RBTreeImpl.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="72" column="13" lean-forward="true" selection-start-line="72" selection-start-column="13" selection-end-line="72" selection-end-column="13" />
+            <state relative-caret-position="214">
+              <caret line="130" column="44" lean-forward="false" selection-start-line="130" selection-start-column="44" selection-end-line="130" selection-end-column="44" />
               <folding>
                 <element signature="e#152#170#0" expanded="true" />
-                <element signature="e#285#312#0" expanded="true" />
+                <element signature="e#286#298#0" expanded="true" />
+                <element signature="e#395#407#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="functional" pinned="false" current-in-tab="false">
+        <entry file="file:///Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/functional">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="202">
+              <caret line="1551" column="0" lean-forward="false" selection-start-line="1551" selection-start-column="0" selection-end-line="1551" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="type_traits" pinned="false" current-in-tab="false">
+        <entry file="file:///Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/type_traits">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="202">
+              <caret line="4290" column="0" lean-forward="false" selection-start-line="4290" selection-start-column="0" selection-end-line="4290" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -78,7 +85,7 @@
       <file leaf-file-name="memory" pinned="false" current-in-tab="false">
         <entry file="file:///Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/memory">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="193">
+            <state relative-caret-position="58215">
               <caret line="3881" column="9" lean-forward="false" selection-start-line="3881" selection-start-column="9" selection-end-line="3881" selection-end-column="9" />
               <folding />
             </state>
@@ -88,28 +95,8 @@
       <file leaf-file-name="RBIterator.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/RBIterator.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="23" lean-forward="true" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RBTree.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/RBTree.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="25" column="10" lean-forward="true" selection-start-line="25" selection-start-column="10" selection-end-line="25" selection-end-column="10" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RBTreeImpl.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/RBTreeImpl.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-111">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="300">
+              <caret line="20" column="40" lean-forward="true" selection-start-line="20" selection-start-column="40" selection-end-line="20" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -118,30 +105,30 @@
       <file leaf-file-name="RBIterator.c" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/RBIterator.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="73" column="0" lean-forward="false" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+            <state relative-caret-position="247">
+              <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RBTreeTester.c" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/RBTreeTester.c">
+      <file leaf-file-name="RBTree.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/RBTree.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="184" column="0" lean-forward="true" selection-start-line="184" selection-start-column="0" selection-end-line="184" selection-end-column="0" />
+            <state relative-caret-position="637">
+              <caret line="57" column="26" lean-forward="true" selection-start-line="57" selection-start-column="26" selection-end-line="57" selection-end-column="26" />
               <folding>
-                <element signature="e#4#22#0" expanded="true" />
+                <element signature="e#1230#1248#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RBTreeLib/CMakeLists.txt">
+      <file leaf-file-name="RBTreeImpl.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/RBTreeImpl.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+            <state relative-caret-position="765">
+              <caret line="55" column="14" lean-forward="false" selection-start-line="55" selection-start-column="14" selection-end-line="55" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -150,9 +137,12 @@
       <file leaf-file-name="RBTree.c" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/RBTree.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="379">
-              <caret line="553" column="0" lean-forward="false" selection-start-line="553" selection-start-column="0" selection-end-line="553" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="193">
+              <caret line="388" column="26" lean-forward="false" selection-start-line="388" selection-start-column="22" selection-end-line="388" selection-end-column="26" />
+              <folding>
+                <element signature="e#13055#13073#0" expanded="true" />
+                <element signature="e#14069#14074#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -171,6 +161,10 @@
       <find>operator</find>
       <find>operator-&gt;</find>
       <find>getNext</find>
+      <find>getIterator</find>
+      <find>getNodeFromIter</find>
+      <find>get</find>
+      <find>copy</find>
     </findStrings>
     <replaceStrings>
       <replace>BOOL</replace>
@@ -192,9 +186,12 @@
         <option value="$PROJECT_DIR$/RBTreeTester.c" />
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/RBTreeImpl/CMakeLists.txt" />
-        <option value="$PROJECT_DIR$/src/RBTree.h" />
         <option value="$PROJECT_DIR$/src/RBTreeTester.c" />
+        <option value="$PROJECT_DIR$/src/RBIterator.h" />
         <option value="$PROJECT_DIR$/src/RBIterator.c" />
+        <option value="$PROJECT_DIR$/src/RBTree.h" />
+        <option value="$PROJECT_DIR$/src/RBTreeImpl.h" />
+        <option value="$PROJECT_DIR$/src/RBTree.c" />
         <option value="$PROJECT_DIR$/RBTreeImpl/RBTreeImpl.h" />
         <option value="$PROJECT_DIR$/RBTreeImpl/main.cpp" />
       </list>
@@ -207,7 +204,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="y" value="23" />
     <option name="width" value="1680" />
     <option name="height" value="1027" />
@@ -326,14 +323,15 @@
       <workItem from="1515809603109" duration="6461000" />
       <workItem from="1515992192946" duration="4750000" />
       <workItem from="1516159272860" duration="6121000" />
+      <workItem from="1516477696818" duration="8803000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="51192000" />
+    <option name="totallyTimeSpent" value="59995000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1680" height="1027" extended-state="0" />
+    <frame x="0" y="23" width="1680" height="1027" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24166666" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -342,7 +340,7 @@
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29812607" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="15" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.43769634" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.43769634" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="17" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -387,11 +385,11 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/RBTreeImpl/main.cpp</url>
-          <line>13</line>
-          <option name="timeStamp" value="36" />
+          <line>40</line>
+          <option name="timeStamp" value="54" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="37" />
+      <option name="time" value="55" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="CMakeRunConfiguration">
@@ -415,6 +413,26 @@
       </expression>
     </expressions>
     <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>curr-&gt;key</expression-string>
+        <language-id>ObjectiveC</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>(P)curr-&gt;key</expression-string>
+        <language-id>ObjectiveC</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>(TreeKey)curr-&gt;key</expression-string>
+        <language-id>ObjectiveC</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>(TreeKey*)p</expression-string>
+        <language-id>ObjectiveC</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>pIterator</expression-string>
         <language-id>ObjectiveC</language-id>
@@ -440,31 +458,9 @@
         <language-id>ObjectiveC</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
-      <expression>
-        <expression-string>(int*)(iter-&gt;currNode-&gt;key)</expression-string>
-        <language-id>ObjectiveC</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>*(int*)(n-&gt;key)</expression-string>
-        <language-id>ObjectiveC</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>*((int *)(n-&gt;key))</expression-string>
-        <language-id>ObjectiveC</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>*(int*)(t-&gt;root-&gt;right-&gt;key)</expression-string>
-        <language-id>ObjectiveC</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/RBTree.h" />
-    <entry file="file://C:/MinGW/include/assert.h" />
     <entry file="file://$PROJECT_DIR$/RBTreeTester.c" />
     <entry file="file://$PROJECT_DIR$/RBTree.c" />
     <entry file="file://$PROJECT_DIR$/RBTreeTester.c" />
@@ -563,18 +559,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/RBIterator.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="23" lean-forward="true" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/RBTreeTester.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="184" column="0" lean-forward="true" selection-start-line="184" selection-start-column="0" selection-end-line="184" selection-end-column="0" />
+        <state relative-caret-position="2760">
+          <caret line="184" column="0" lean-forward="false" selection-start-line="184" selection-start-column="0" selection-end-line="184" selection-end-column="0" />
           <folding>
             <element signature="e#4#22#0" expanded="true" />
           </folding>
@@ -583,59 +571,89 @@
     </entry>
     <entry file="file:///Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/memory">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
+        <state relative-caret-position="58215">
           <caret line="3881" column="9" lean-forward="false" selection-start-line="3881" selection-start-column="9" selection-end-line="3881" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/RBTree.c">
+    <entry file="file://$PROJECT_DIR$/src/RBIterator.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="379">
-          <caret line="553" column="0" lean-forward="false" selection-start-line="553" selection-start-column="0" selection-end-line="553" selection-end-column="0" />
+        <state relative-caret-position="300">
+          <caret line="20" column="40" lean-forward="true" selection-start-line="20" selection-start-column="40" selection-end-line="20" selection-end-column="40" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/RBTreeImpl.h">
+    <entry file="file:///Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/type_traits">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-111">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="202">
+          <caret line="4290" column="0" lean-forward="false" selection-start-line="4290" selection-start-column="0" selection-end-line="4290" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/RBTree.h">
+    <entry file="file:///Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/functional">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="25" column="10" lean-forward="true" selection-start-line="25" selection-start-column="10" selection-end-line="25" selection-end-column="10" />
+        <state relative-caret-position="202">
+          <caret line="1551" column="0" lean-forward="false" selection-start-line="1551" selection-start-column="0" selection-end-line="1551" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/RBIterator.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="73" column="0" lean-forward="false" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+        <state relative-caret-position="247">
+          <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/RBTree.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="637">
+          <caret line="57" column="26" lean-forward="true" selection-start-line="57" selection-start-column="26" selection-end-line="57" selection-end-column="26" />
+          <folding>
+            <element signature="e#1230#1248#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/RBTreeImpl.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="765">
+          <caret line="55" column="14" lean-forward="false" selection-start-line="55" selection-start-column="14" selection-end-line="55" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/RBTree.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="193">
+          <caret line="388" column="26" lean-forward="false" selection-start-line="388" selection-start-column="22" selection-end-line="388" selection-end-column="26" />
+          <folding>
+            <element signature="e#13055#13073#0" expanded="true" />
+            <element signature="e#14069#14074#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/RBTreeImpl/RBTreeImpl.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="72" column="13" lean-forward="true" selection-start-line="72" selection-start-column="13" selection-end-line="72" selection-end-column="13" />
+        <state relative-caret-position="214">
+          <caret line="130" column="44" lean-forward="false" selection-start-line="130" selection-start-column="44" selection-end-line="130" selection-end-column="44" />
           <folding>
             <element signature="e#152#170#0" expanded="true" />
-            <element signature="e#285#312#0" expanded="true" />
+            <element signature="e#286#298#0" expanded="true" />
+            <element signature="e#395#407#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/RBTreeImpl/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="1" lean-forward="true" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
+        <state relative-caret-position="608">
+          <caret line="35" column="20" lean-forward="false" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="20" />
           <folding>
             <element signature="e#1#24#0" expanded="true" />
           </folding>

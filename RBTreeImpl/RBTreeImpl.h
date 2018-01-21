@@ -17,14 +17,22 @@ extern "C"{
 
 namespace RedBlackTree{
 
-    template <typename K,typename ... T>
-    class RBTreeImpl{
+
+    template <typename K>
+    struct RBCompInt{
+        virtual int compare(const K&, const K&) = 0;
+    };
+
+    template <typename K>
+    class RBTreeImpl :
+            private RBCompInt<K>{
+
     private:
 
-        using Key = const K;
-        using TreeKey = std::tuple<Key,const T...>;
+        using CompInt = RBCompInt<K>;
+        using TreeKey = std::pair<RBCompInt<K>*,K>;
+        using TreeComparator = std::function<int(const K&,const K&)>;
         friend class RBIterator;
-
 
         class RBIterator{
 
@@ -36,22 +44,24 @@ namespace RedBlackTree{
 
             RBIterator(const RBTreeImpl &instance):
                     pIterator(instance.pTreeImpl->getIterator(
-                            instance.pTreeImpl.get())){
+                            instance.pTreeImpl.get(),NULL)){
             }
 
-            RBIterator(RBIter_t *ptr):
+           RBIterator(RBIter_t *ptr):
                 pIterator(ptr){
-
             }
-
 
             RBIterator(const RBIterator &other){
-                return operator=(other);
+                 operator=(other);
             }
 
-            RBIterator& operator=(const RBIterator& other){
-                pIterator = other.pIterator;
-                return (*this);
+            RBIterator& operator=(const RBIterator& other) {
+                pIterator =
+                        other.pIterator ?
+                        (other.pIterator)->clone(other.pIterator) :
+                        NULL;
+
+                return *this;
             }
 
             RBIterator(RBIterator &&other){
@@ -64,12 +74,17 @@ namespace RedBlackTree{
                 return (*this);
             }
 
-            TreeKey& operator*(){
-                return *static_cast<TreeKey*>(pIterator->get(pIterator));
+            const K& operator*() const{
+                return static_cast<TreeKey*>(pIterator->get(pIterator))->second;
             }
 
-             void operator++(){
+            K* operator->(){
+                return &static_cast<TreeKey*>(pIterator->get(pIterator))->second;
+            }
+
+            RBIterator operator++(){
                 pIterator = pIterator->getNext(&pIterator);
+                return *this;
             }
 
             bool operator==(const RBIterator& other){
@@ -100,19 +115,24 @@ namespace RedBlackTree{
         static
         int
         comp(void *p1, void *p2){
-            auto v1 = static_cast<TreeKey*>(p1);
-            auto v2 = static_cast<TreeKey*>(p2);
-            auto k1 = std::get<0>(*v1);
-            auto k2 = std::get<0>(*v2);
 
-            if(k1 < k2){
-                return -1;
-            }
-            else if(k1 == k2){
-                return 0;
-            }
+            auto k1 = static_cast<TreeKey*>(p1)->second;
+            auto k2 = static_cast<TreeKey*>(p2)->second;
 
-            return 1;
+            return static_cast<TreeKey*>(p1)
+                    ->first
+                    ->compare(k1,k2);
+        }
+
+        static
+        void
+        copy(void **to, void **from){
+            auto kt1 = reinterpret_cast<TreeKey **>(to);
+            auto kt2 = reinterpret_cast<TreeKey **>(from);
+
+            delete(*kt1);
+            *kt1 = *kt2;
+            *kt2 = NULL;
         }
 
         static
@@ -121,18 +141,34 @@ namespace RedBlackTree{
             delete(static_cast<TreeKey *>(p));
         }
 
+        virtual
+        int compare(const K& first, const K& second) override{
+            return comparator(first,second);
+        }
+
         std::unique_ptr<
                 RBTree_t,
                 std::function<void(void*)>> pTreeImpl;
+
+        TreeComparator comparator;
+
+
     public:
 
         using iterator = RBIterator;
+        using Comparator = TreeComparator;
 
         RBTreeImpl():
-            pTreeImpl(
-                    createRBTreeWithCB(alloc,dealloc,comp,deleteCB),
-                    [](void*p){deleteRBTree(static_cast<RBTree_t*>(p));}){
-        }
+            RBTreeImpl([](const K& first, const K& second)->int{
+                return first < second ? -1 : (first == second ? 0 : 1);
+            }){}
+
+
+        RBTreeImpl(const Comparator& compt):
+                pTreeImpl(
+                        createRBTreeWithCB(alloc,dealloc,comp,copy,deleteCB),
+                        [](void*p){deleteRBTree(static_cast<RBTree_t*>(p));}),
+                comparator(compt){}
 
         RBTreeImpl(const RBTreeImpl &other) = delete;
         const RBTreeImpl& operator=(const RBTreeImpl &other) = delete;
@@ -148,9 +184,9 @@ namespace RedBlackTree{
         }
 
         bool
-        insert(Key& key, const T&... vals){
+        insert(K key){
             TreeKey *compoundKey =
-                    new TreeKey(std::make_tuple(key,vals...));
+                    new TreeKey({this,key});
 
             if(!compoundKey){
                 throw std::string("out of memory");
@@ -169,10 +205,10 @@ namespace RedBlackTree{
         }
 
         bool
-        del(Key& k){
+        del(K k){
 
-            std::tuple<Key> tKey =
-                    std::make_tuple(k);
+            auto tKey =
+                    std::make_pair(this,k);
 
             if(!pTreeImpl){
                 return false;
@@ -180,7 +216,7 @@ namespace RedBlackTree{
 
             return pTreeImpl->del(
                     pTreeImpl.get(),
-                    const_cast<std::tuple<Key> *>(&tKey));
+                    &tKey);
         }
 
         iterator begin(){

@@ -17,4 +17,7 @@ getIteratorFromNode(
         Allocator alloc,
         Deallocator dalloc);
 
+
+extern Node *getNodeFromIter(RBIter_t*);
+
 #endif
