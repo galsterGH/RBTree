@@ -10,7 +10,7 @@ struct P{
 };
 
 int main(){
-    RedBlackTree::RBTreeImpl<P> tree([](const P& p1, const P& p2)->int{
+    Datastr::RedBlackTree<P> tree([](const P& p1, const P& p2)->int{
        return p1.i < p2.i || (p1.i == p2.i && p1.j < p2.j) ? 1 :
               (p1.i == p2.i && p1.j == p2.j ? 0 : -1);
     });
@@ -35,14 +35,11 @@ int main(){
     tree.del({10,2});
     tree.del({5,6});
 
-
     cout << "after delete:" << endl;
 
     for(auto i = tree.begin(); i != tree.end(); ++i){
         cout << i->i << " " << i->j << endl;
     }
-
-
 
     return 0;
 }

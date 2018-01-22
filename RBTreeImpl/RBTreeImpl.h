@@ -2,8 +2,8 @@
 // Created by guyal on 1/14/2018.
 //
 
-#ifndef RBTREEIMPL_RBTREEIMPL_H
-#define RBTREEIMPL_RBTREEIMPL_H
+#ifndef RedBlackTree_RedBlackTree_H
+#define RedBlackTree_RedBlackTree_H
 
 extern "C"{
     #include "../src/RBTree.h"
@@ -15,7 +15,7 @@ extern "C"{
 #include <tuple>
 #include <functional>
 
-namespace RedBlackTree{
+namespace Datastr{
 
     template <typename K>
     struct RBCompInt{
@@ -23,7 +23,7 @@ namespace RedBlackTree{
     };
 
     template <typename K>
-    class RBTreeImpl :
+    class RedBlackTree :
             private RBCompInt<K>{
 
     private:
@@ -57,7 +57,7 @@ namespace RedBlackTree{
             // This iterator class supports all expected operators of an iterator
             // e.g. operator*, operator->, operator++
             //
-            RBIterator(const RBTreeImpl &instance):
+            RBIterator(const RedBlackTree &instance):
                     pIterator(instance.pTreeImpl->getIterator(
                             instance.pTreeImpl.get(),NULL)){
             }
@@ -202,8 +202,8 @@ namespace RedBlackTree{
         using Comparator = TreeComparator;
 
         // Default constructor initializes a default comparator
-        RBTreeImpl():
-            RBTreeImpl([](const K& first, const K& second)->int{
+        RedBlackTree():
+            RedBlackTree([](const K& first, const K& second)->int{
                 return first < second ? -1 : (first == second ? 0 : 1);
             }){}
 
@@ -213,22 +213,22 @@ namespace RedBlackTree{
         // in the RBTree Lib and passes to it all the functions above
         // it also creates the deleter function that calls deleteRbTree from the RBTree Lib.
         //
-        RBTreeImpl(const Comparator& compt):
+        RedBlackTree(const Comparator& compt):
                 pTreeImpl(
                         createRBTreeWithCB(alloc,dealloc,comp,copy,deleteCB),
                         [](void*p){deleteRBTree(static_cast<RBTree_t*>(p));}),
                 comparator(compt){}
 
         //currently we don't allow copying a tree
-        RBTreeImpl(const RBTreeImpl &other) = delete;
-        const RBTreeImpl& operator=(const RBTreeImpl &other) = delete;
+        RedBlackTree(const RedBlackTree &other) = delete;
+        const RedBlackTree& operator=(const RedBlackTree &other) = delete;
 
-        RBTreeImpl(RBTreeImpl &&other){
+        RedBlackTree(RedBlackTree &&other){
             operator=(std::move(other));
         }
 
-        const RBTreeImpl&
-        operator=(RBTreeImpl &&other){
+        const RedBlackTree&
+        operator=(RedBlackTree &&other){
             pTreeImpl = std::move(other);
             return (*this);
         }
@@ -283,4 +283,4 @@ namespace RedBlackTree{
         }
     };
 };
-#endif //RBTREEIMPL_RBTREEIMPL_H
+#endif //RedBlackTree_RedBlackTree_H
