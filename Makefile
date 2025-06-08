@@ -19,6 +19,7 @@ $(LIB): $(OBJ)
 
 test: $(LIB)
 	$(CC) $(CFLAGS) -Isrc tests/test_rbtree.c $(LIB) -o rbtree_test
+	./run_tests.sh
 
 cpp: $(LIB)
 	$(CXX) $(CXXFLAGS) RBTreeImpl/main.cpp $(LIB) -o rbtree_cpp
