@@ -18,7 +18,7 @@ $(LIB): $(OBJ)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 test: $(LIB)
-	$(CC) $(CFLAGS) src/RBTreeTester.c $(LIB) -o rbtree_test
+	$(CC) $(CFLAGS) -Isrc tests/test_rbtree.c $(LIB) -o rbtree_test
 
 cpp: $(LIB)
 	$(CXX) $(CXXFLAGS) RBTreeImpl/main.cpp $(LIB) -o rbtree_cpp

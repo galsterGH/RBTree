@@ -1,4 +1,8 @@
 #include "RBIterator.h"
+/**
+ * @file RBIterator.c
+ * @brief Implementation of RBTree iterators.
+ */
 
 #define TO_ITER(i) ((RBIterImpl_t*)(i))
 
