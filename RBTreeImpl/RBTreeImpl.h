@@ -223,13 +223,17 @@ namespace Datastr{
         RedBlackTree(const RedBlackTree &other) = delete;
         const RedBlackTree& operator=(const RedBlackTree &other) = delete;
 
-        RedBlackTree(RedBlackTree &&other){
-            operator=(std::move(other));
+        RedBlackTree(RedBlackTree &&other) noexcept{
+            pTreeImpl = std::move(other.pTreeImpl);
+            comparator = std::move(other.comparator);
         }
 
         const RedBlackTree&
-        operator=(RedBlackTree &&other){
-            pTreeImpl = std::move(other);
+        operator=(RedBlackTree &&other) noexcept{
+            if(this != &other){
+                pTreeImpl = std::move(other.pTreeImpl);
+                comparator = std::move(other.comparator);
+            }
             return (*this);
         }
 
@@ -243,13 +247,17 @@ namespace Datastr{
             }
 
             if(!pTreeImpl){
+                delete compoundKey;
                 return false;
             }
 
-            int res =
-            pTreeImpl->insert(
+            int res = pTreeImpl->insert(
                     pTreeImpl.get(),
                     static_cast<void*>(compoundKey));
+
+            if(!res){
+                delete compoundKey;
+            }
 
             return (res);
         }
