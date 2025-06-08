@@ -1,4 +1,5 @@
 #include "RBTree.h"
+#include "RBTreeImpl.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
@@ -21,6 +22,32 @@ static void ptr_copy(void **dst, void **src){ *dst = *src; }
 
 static int cb_count = 0;
 static void count_cb(void *key){ (void)key; cb_count++; }
+
+static int subtree_height(Node *n){
+    if(!n) return 0;
+    int lh = subtree_height(n->left);
+    int rh = subtree_height(n->right);
+    return (lh > rh ? lh : rh) + 1;
+}
+
+static int ilog2u(unsigned int x){
+    int l = 0;
+    while(x > 1){
+        x >>= 1;
+        l++;
+    }
+    return l;
+}
+
+static void assert_balanced(RBTree_t *t, size_t count){
+    Tree *tree = (Tree*)t;
+    int h = subtree_height(tree->root);
+    int lg = ilog2u((unsigned int)count + 1);
+    int max_h = 2 * (lg + 1);
+    ASSERT_TRUE(h <= max_h);
+    if(tree->root)
+        ASSERT_TRUE(GET_COLOR(tree->root) == BLACK);
+}
 
 static void test_insert_find(void){
     RBTree_t *t = createRBTree(std_alloc, std_dealloc, int_comp, ptr_copy);
@@ -81,11 +108,49 @@ static void test_callback(void){
     ASSERT_TRUE(cb_count == 3);
 }
 
+static void test_balance_ops(void){
+    RBTree_t *t = createRBTree(std_alloc, std_dealloc, int_comp, ptr_copy);
+    int values[150];
+    for(int i=0;i<150;i++) values[i] = i;
+    size_t count = 0;
+
+    /* insert first batch */
+    for(int i=0;i<100;i++){
+        ASSERT_TRUE(t->insert(t,&values[i]));
+        count++;
+        assert_balanced(t,count);
+    }
+
+    /* delete a subset */
+    for(int i=0;i<50;i++){
+        ASSERT_TRUE(t->del(t,&values[i]));
+        count--;
+        assert_balanced(t,count);
+    }
+
+    /* insert second batch */
+    for(int i=100;i<150;i++){
+        ASSERT_TRUE(t->insert(t,&values[i]));
+        count++;
+        assert_balanced(t,count);
+    }
+
+    /* remove all remaining */
+    for(int i=50;i<150;i++){
+        ASSERT_TRUE(t->del(t,&values[i]));
+        count--;
+        assert_balanced(t,count);
+    }
+
+    deleteRBTree(t);
+}
+
 int main(void){
     test_insert_find();
     test_delete();
     test_iterator();
     test_callback();
+    test_balance_ops();
     printf("All tests passed\n");
     return 0;
 }
