@@ -7,6 +7,11 @@ static void* get(RBIter_t *i);
 static RBIter_t* getNext(RBIter_t **i);
 
 static
+/**
+ * @brief Clone an iterator.
+ * @param from iterator to clone.
+ * @return pointer to cloned iterator or NULL.
+ */
 RBIter_t*
 clone(RBIter_t *from){
 
@@ -35,6 +40,11 @@ clone(RBIter_t *from){
 }
 
 static
+/**
+ * @brief Retrieve the key at the iterator
+ * @param i iterator instance
+ * @return pointer to stored key
+ */
 void*
 get(RBIter_t *i){
     RBIterImpl_t *iter = TO_ITER(i);
@@ -45,6 +55,11 @@ get(RBIter_t *i){
 
 
 static
+/**
+ * @brief Get iterator to next node in order
+ * @param i iterator pointer to update
+ * @return next iterator or NULL
+ */
 RBIter_t*
 getNext(RBIter_t **i){
 
@@ -58,8 +73,8 @@ getNext(RBIter_t **i){
     allc = iter->alloc;
     dllc = iter->dalloc;
 
-    // first free the memory of i so that we
-    // don't leak it
+    /// first free the memory of i so that we
+    /// don't leak it
     dllc(iter);
     *i = NULL;
 
@@ -71,15 +86,15 @@ getNext(RBIter_t **i){
         }
     }else{
 
-        //
-        // we use our parent pointer to detect who
-        // is the next inorder node
-        // if current node (pointed to by prev)
-        // is the right son of its parent, then we've
-        // already visited that parent before
-        // we stop when we either find a parent which the current node
-        // is its left child, or when we reach the parent of root-> NULL
-        //
+        ///
+        /// we use our parent pointer to detect who
+        /// is the next inorder node
+        /// if current node (pointed to by prev)
+        /// is the right son of its parent, then we've
+        /// already visited that parent before
+        /// we stop when we either find a parent which the current node
+        /// is its left child, or when we reach the parent of root-> NULL
+        ///
 
         for(prev = curr,curr = curr->parent;
             curr && (RIGHT_OF(curr) == prev);
@@ -106,6 +121,13 @@ getNext(RBIter_t **i){
     return &(newIter->api);
 }
 
+/**
+ * @brief Create an iterator from a node
+ * @param from starting node
+ * @param allc allocator
+ * @param dlloc deallocator
+ * @return iterator starting at the smallest key under from
+ */
 
 RBIter_t*
 getIteratorFromNode(
@@ -139,9 +161,15 @@ getIteratorFromNode(
     return &(iter->api);
 }
 
+/**
+ * @brief Return the node associated with an iterator
+ * @param iter iterator instance
+ * @return internal node pointer
+ */
 Node*
 getNodeFromIter(RBIter_t* iter){
     assert(iter);
     return TO_ITER(iter)->currNode;
 }
+
 

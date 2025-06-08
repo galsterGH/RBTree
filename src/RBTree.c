@@ -65,7 +65,7 @@
         n = *rot;
         newParent = (RIGHT_ROTATE(dir) ? n->left : n->right);
 
-        // when we  rotate we have to have a child to replace this node
+        /// when we  rotate we have to have a child to replace this node
         assert(newParent != NULL);
         newParentSon = (RIGHT_ROTATE(dir) ? newParent->right : newParent->left);
 
@@ -123,9 +123,9 @@
           break;
         }
 
-        //
-        // a NULL uncle is a black uncle
-        //
+        ///
+        /// a NULL uncle is a black uncle
+        ///
         if(uncle &&
            GET_COLOR(p) == RED &&
            GET_COLOR(uncle) == RED){
@@ -134,18 +134,18 @@
           COLOR_BLACK(uncle);
           COLOR_RED(gp);
 
-          //
-          //the gradfather could be violating RB props
-          //
+          ///
+          ///the gradfather could be violating RB props
+          ///
           ins = gp;
         }
         else{
 
-          //
-          // if uncle is left son of gp and ins is left son of p
-          // or uncle is right son of gp and ins is right son of p
-          // need to do a single rotation on p
-          //
+          ///
+          /// if uncle is left son of gp and ins is left son of p
+          /// or uncle is right son of gp and ins is right son of p
+          /// need to do a single rotation on p
+          ///
 
           if(ins == p->left && !uncleDir){
             rotate(&p,rightDir);
@@ -156,9 +156,9 @@
             assert(p == ins);
           }
 
-          //
-          // uncle and ins are of opposite direction
-          //
+          ///
+          /// uncle and ins are of opposite direction
+          ///
           SWAP_COLORS(p);
           SWAP_COLORS(gp);
 
@@ -221,8 +221,8 @@
       Node *curr = *nodeToFix,*sibling = NULL, *p = NULL;
       sibling = dir.dir ? RIGHT_OF(curr->parent) : LEFT_OF(curr->parent);
 
-      //sibling can't be NULL - if sibling is NULL that means that the tree was
-      // violating the RB properties (since nodeToFix has a black count of 2)
+      ///sibling can't be NULL - if sibling is NULL that means that the tree was
+      /// violating the RB properties (since nodeToFix has a black count of 2)
       assert(sibling != NULL);
 
       if (GET_COLOR(sibling) == RED) {
@@ -286,8 +286,8 @@
         Node *sibling = NULL, *p = NULL;
         static Dir leftDir = {.dir = 0}, rightDir = {.dir = 1};
 
-        // we only deal with nodeToFix which is BLACK
-        // and is not the root - this is called double black node
+        /// we only deal with nodeToFix which is BLACK
+        /// and is not the root - this is called double black node
         while(nodeToFix != t->root &&
                 GET_COLOR(nodeToFix) == BLACK) {
 
@@ -299,7 +299,7 @@
             }
         }
 
-        // if nodeToFix is either the root or red
+        /// if nodeToFix is either the root or red
         COLOR_BLACK(nodeToFix);
     }
 
@@ -319,10 +319,10 @@
             return FALSE;
         }
 
-        //
-        // The sentinel will be used in the case of a black leaf node
-        // that is being deleted
-        //
+        ///
+        /// The sentinel will be used in the case of a black leaf node
+        /// that is being deleted
+        ///
 
         memset(&sentinel,0,sizeof(Node));
         sentinel.color.rb = BLACK;
@@ -351,10 +351,10 @@
 
            inOrderChild->parent = inOrder->parent;
 
-            //
-            // we want to update the parent of the
-            // only child of inOrder (the node we are deleting)
-            //
+            ///
+            /// we want to update the parent of the
+            /// only child of inOrder (the node we are deleting)
+            ///
 
             if(inOrder->parent){
 
@@ -367,9 +367,9 @@
             }
             else{
 
-                //
-                // inOrder does not have a parent -> it is the root
-                //
+                ///
+                /// inOrder does not have a parent -> it is the root
+                ///
                 assert(inOrder == root);
                 treeImpl->root = (inOrderChild == &sentinel ? NULL : inOrderChild);
 
@@ -378,10 +378,10 @@
                 }
             }
 
-        //
-        // Update the keys such that the original node
-        // we wanted to delete has the key of the inOrder node which we'll be deleting
-        //
+        ///
+        /// Update the keys such that the original node
+        /// we wanted to delete has the key of the inOrder node which we'll be deleting
+        ///
 
         if(deleteLoc!= inOrder) {
             treeImpl->copy(&(deleteLoc->key),&(inOrder->key));
@@ -389,17 +389,17 @@
 
         if(GET_COLOR(inOrder) == BLACK){
 
-            //
-            // inOrderChild has to exist given that inOrder is not the root
-            // and that it is black
-            //
+            ///
+            /// inOrderChild has to exist given that inOrder is not the root
+            /// and that it is black
+            ///
             assert(inOrderChild);
             adjustDelete(inOrderChild);
         }
 
-        //
-        // make sure to disconnect the sentinel node from the tree
-        //
+        ///
+        /// make sure to disconnect the sentinel node from the tree
+        ///
 
         if(sentinel.parent){
 
@@ -565,7 +565,11 @@
     void
     deleteNodes(Node **root){
 
-      //TODO - do it iteratively
+      ///TODO - do it iteratively
+/**
+ * @brief Recursively delete all nodes in the tree
+ * @param root pointer to root node pointer
+ */
       if(!(*root)){
         return;
       }
@@ -581,6 +585,10 @@
       *root = NULL;
     }
 
+/**
+ * @brief Create a new tree instance
+ * @return pointer to RBTree API
+ */
     RBTree_t *
     createRBTree(
         const Allocator alloc,
@@ -612,6 +620,9 @@
       return &(tree->api);
     }
 
+/**
+ * @brief Create a tree with a delete callback
+ */
     RBTree_t *
     createRBTreeWithCB(
             const Allocator alloc,
@@ -642,6 +653,9 @@
         return &(tree->api);
     }
 
+/**
+ * @brief Destroy a tree instance
+ */
     BOOL
     deleteRBTree(RBTree_t *tree){
 

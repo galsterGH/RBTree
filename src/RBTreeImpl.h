@@ -1,3 +1,7 @@
+/**
+ * @file RBTreeImpl.h
+ * @brief Internal definitions for RBTree implementation
+ */
 #ifndef _RBTREE_IMPL_H
 #define _RBTREE_IMPL_H
 
@@ -29,9 +33,12 @@
           memset(x,0,size);\
       }while(0)
 
-//forward declare RBTreeImpl
+///forward declare RBTreeImpl
 struct RBTreeImpl;
 
+/**
+ * @brief Node structure used internally by the tree
+ */
 typedef
 struct RBNode{
     void *key;
@@ -46,6 +53,9 @@ struct RBNode{
 
 }Node;
 
+/**
+ * @brief Main tree container
+ */
 typedef
 struct RBTreeImpl{
     RBTree_t api;

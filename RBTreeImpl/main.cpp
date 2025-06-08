@@ -1,3 +1,7 @@
+/**
+ * @file main.cpp
+ * @brief Example usage of the C++ RBTree wrapper
+ */
 
 #include "RBTreeImpl.h"
 #include <iostream>
@@ -47,7 +51,7 @@ int main(){
     return 0;
 }
 
-/*
+/**
 int main() {
     RedBlackTree::RBTreeImpl<int> tree;
     tree.insert(10);

@@ -60,27 +60,27 @@
         int n = 100;
         t->insert(t,&i);
         printf("*****\n");
-        //t->showTree(t);
+        ///t->showTree(t);
         printf("-------\n");
         t->insert(t,&j);
         printf("*****\n");
-        //t->showTree(t);
+        ///t->showTree(t);
         printf("-------\n");
         t->insert(t,&l);
         printf("*****\n");
-        //t->showTree(t);
+        ///t->showTree(t);
         printf("-------\n");
         t->insert(t,&k);
         printf("*****\n");
-        //t->showTree(t);
+        ///t->showTree(t);
         printf("-------\n");
         t->insert(t,&m);
         printf("*****\n");
-        //t->showTree(t);
+        ///t->showTree(t);
         printf("-------\n");
         t->insert(t,&n);
         printf("*****\n");
-        //t->showTree(t);
+        ///t->showTree(t);
         printf("-------\n");
     }
 
@@ -109,7 +109,7 @@
             t->insert(t,&arrP[i]);
         }
 
-       // t->showTree(t);
+       /// t->showTree(t);
     }
 
     void testDelete1() {
@@ -139,11 +139,11 @@
         t->insert(t, &n);
         t->insert(t, &o);
         t->insert(t, &p);
-        //t->showTree(t);
+        ///t->showTree(t);
 
         t->del(t,&j);
         t->del(t,&i);
-       // t->showTree(t);
+       /// t->showTree(t);
     }
 
     void testIteration(){
