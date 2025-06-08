@@ -1,3 +1,7 @@
+/**
+ * @file RBTree.c
+ * @brief Core implementation of the red-black tree API.
+ */
     #include "RBTreeImpl.h"
     #include "RBIterator.h"
 
@@ -6,6 +10,12 @@
     }Dir;
 
     static
+/**
+ * @brief Search for a key inside a subtree.
+ * @param root subtree root
+ * @param toFind key to search for
+ * @return node containing the key or NULL
+ */
     Node*
     findNode(
         Node *root,
@@ -33,6 +43,11 @@
 
     static
     Node*
+/**
+ * @brief Return the inorder successor of a node.
+ * @param curr starting node
+ * @return leftmost node of the right subtree or NULL
+ */
     getInorderSucc(Node *curr){
 
       Node *succ = NULL;
@@ -50,6 +65,11 @@
 
     static
     void
+/**
+ * @brief Perform a left or right rotation around a node.
+ * @param rot pointer to pointer to the rotation root
+ * @param dir direction of rotation (0=left, 1=right)
+ */
     rotate(
        Node **rot,
        const Dir dir){
@@ -102,6 +122,10 @@
 
     static
     void
+/**
+ * @brief Restore red-black properties after insertion.
+ * @param ins newly inserted node
+ */
     adjustInsert(
       Node *ins){
 
@@ -178,6 +202,12 @@
 
     static
     Node*
+/**
+ * @brief Find the node under which a new key should be inserted.
+ * @param root tree root
+ * @param key key to insert
+ * @return insertion point node
+ */
     getInsPoint(
         Node *root,
         void *key){
@@ -214,6 +244,11 @@
 
     static
     void
+/**
+ * @brief Helper for deletion fixup depending on sibling direction.
+ * @param nodeToFix pointer to node needing color fix
+ * @param dir direction of the sibling
+ */
     adjustDeleteByDir(Node **nodeToFix, Dir dir){
 
       static Dir leftDir = {.dir = 0}, rightDir = {.dir = 1};
@@ -280,6 +315,10 @@
 
     static
     void
+/**
+ * @brief Restore red-black properties after deletion.
+ * @param nodeToFix node from which fixing starts
+ */
     adjustDelete(Node *nodeToFix){
 
         Tree *t = nodeToFix->tree;
@@ -305,6 +344,12 @@
 
     static
     BOOL
+/**
+ * @brief Delete a key from the tree.
+ * @param tree tree instance
+ * @param toDelete key to remove
+ * @return TRUE on success
+ */
     del(RBTree_t *tree,
            void *toDelete){
 
@@ -423,6 +468,12 @@
 
     static
     BOOL
+/**
+ * @brief Insert a key into the tree.
+ * @param tree tree instance
+ * @param toInsert key to insert
+ * @return TRUE on success, FALSE if duplicate
+ */
     insert(
         RBTree_t *tree,
         void *toInsert){
@@ -520,6 +571,12 @@
 
     static
     void *
+/**
+ * @brief Find a key in the tree.
+ * @param t tree instance
+ * @param toFind key to locate
+ * @return pointer to stored key or NULL
+ */
     find(RBTree_t * t,
          void *toFind){
 
@@ -538,6 +595,12 @@
 
     static
     RBIter_t*
+/**
+ * @brief Obtain an iterator over the tree.
+ * @param tree tree instance
+ * @param curr optional iterator to reposition
+ * @return iterator starting from smallest key
+ */
     getIterator(
             RBTree_t *tree,
             RBIter_t* curr){
