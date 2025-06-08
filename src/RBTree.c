@@ -58,7 +58,7 @@
              *newParent = NULL,
              *newParentSon = NULL;
 
-        if(!rot && !(*rot)){
+        if(!rot || !(*rot)){
           return;
         }
 
